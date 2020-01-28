@@ -1,0 +1,4 @@
+https://www.youtube.com/watch?v=nMExd4DthdA
+https://www.youtube.com/watch?v=v6eDztNiJwo
+https://algs4.cs.princeton.edu/33balanced/RedBlackBST.java.html
+https://stackoverflow.com/questions/7504064/does-java-allow-nullable-types
