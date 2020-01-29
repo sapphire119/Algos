@@ -361,23 +361,37 @@ public class RedBlackTree<T> : IBinarySearchTree<T> where T : IComparable
         {
             if (node.Right == null)
             {
-                return node.Left;
+                return BalanceReplacement(node.Left, node);
             }
             if (node.Left == null)
             {
-                return node.Right;
+                return BalanceReplacement(node.Right, node);
             }
 
             Node temp = node;
             node = this.FindMin(temp.Right);
             node.Right = this.DeleteMin(temp.Right);
             node.Left = temp.Left;
-
+            node.Parent = temp.Parent;
+            CorrectChildParentRelation(node);
         }
 
         node.Count = this.Count(node.Left) + this.Count(node.Right) + 1;
 
         return node;
+    }
+
+    private void CorrectChildParentRelation(Node node)
+    {
+        if (node.Left != null) node.Left.Parent = node;
+        if (node.Right != null) node.Right.Parent = node;
+    }
+
+    private Node BalanceReplacement(Node replacement, Node node)
+    {
+        if (replacement == null) return replacement;
+        replacement.Parent = node.Parent;
+        return replacement;
     }
 
     private Node FindMin(Node node)
@@ -520,27 +534,40 @@ public class Launcher
     {
         var rbt = new RedBlackTree<int>();
 
-        rbt.Insert(3);
-        rbt.Insert(1);
-        rbt.Insert(5);
-        //ColorFlip
-        rbt.Insert(7);
-        //Rotate R-L
-        //After Rotation Flip
-        rbt.Insert(6);
+        //rbt.Insert(3);
+        //rbt.Insert(1);
+        //rbt.Insert(5);
+        ////ColorFlip
+        //rbt.Insert(7);
+        ////Rotate R-L
+        ////After Rotation Flip
+        //rbt.Insert(6);
 
-        //Color Flip
-        rbt.Insert(8);
-        //Left Rotate
-        rbt.Insert(9);
-        //Color Flip
-        //Left Rotation
+        ////Color Flip
+        //rbt.Insert(8);
+        ////Left Rotate
+        //rbt.Insert(9);
+        ////Color Flip
+        ////Left Rotation
+        //rbt.Insert(10);
+        //;
+        ////End Result Tree:
+        ////Root -> 6
+        ////3, 8 RED
+        ////1, 5, 7, 9 BLACK
+        ////10 Red
+
+
+        rbt.Insert(30);
+        rbt.Insert(20);
+        rbt.Insert(50);
         rbt.Insert(10);
-        ;
-        //End Result Tree:
-        //Root -> 6
-        //3, 8 RED
-        //1, 5, 7, 9 BLACK
-        //10 Red
+        rbt.Insert(60);
+        rbt.Insert(40);
+        rbt.Insert(45);
+        rbt.Insert(42);
+        rbt.Insert(47);
+
+        rbt.Delete(30);
     }
 }
