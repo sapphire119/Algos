@@ -133,7 +133,7 @@ public class RedBlackTree<T> : IBinarySearchTree<T> where T : IComparable
 
         if ((IsRed(node.Right) && IsRed(node.Right.Right)) || (IsRed(node.Left) && IsRed(node.Left.Left)))
         {
-            node = this.Rotate(node);
+            node = this.DoubleRotate(node);
             this.FixColors(node);
         }
 
@@ -144,7 +144,6 @@ public class RedBlackTree<T> : IBinarySearchTree<T> where T : IComparable
 
     private Node Balance(Node node)
     {
-
         return node;
     }
 
@@ -160,34 +159,69 @@ public class RedBlackTree<T> : IBinarySearchTree<T> where T : IComparable
             return this.RotateLeft(node);
         }
 
-        bool? nodePosition = node.Parent != null ? IsLeft(node) : default(bool?);
+        return node;
+    }
+
+    private Node DoubleRotate(Node node)
+    {
+        bool? parentNodePosition = node.Parent != null ? IsLeft(node) : default(bool?);
         if (IsRed(node.Right) && IsRed(node.Right.Right))
         {
-            return this.RotateLeft(node);
+            return this.DoubleRedRotateLeft(node, parentNodePosition);
         }
 
         if (IsRed(node.Left) && IsRed(node.Left.Left))
         {
-            return this.RotateRight(node);
+            return this.DoubleRedRotateRight(node, parentNodePosition);
         }
 
         return node;
     }
 
-    //private Node DoubleRotate(Node node)
-    //{
-    //    if (IsRed(node.Right) && IsRed(node.Right.Right))
-    //    {
-    //        return this.DoubleRotateLeft(node);
-    //    }
+    private Node FixParent(Node node, bool? parentNodePosition)
+    {
+        if (parentNodePosition != null)
+        {
+            if (parentNodePosition.Value)
+            {
+                node.Parent.Left = node;
+            }
+            else
+            {
+                node.Parent.Right = node;
+            }
+        }
 
-    //    if (IsRed(node.Left) && IsRed(node.Left.Left))
-    //    {
-    //        return this.DoubleRotateRight(node);
-    //    }
+        return node;
+    }
 
-    //    return node;
-    //}
+    private Node DoubleRedRotateLeft(Node node, bool? parentNodePosition)
+    {
+        var temp = node;
+        node = temp.Right;
+        node.Parent = temp.Parent;
+        node = FixParent(node, parentNodePosition);
+        temp.Right = node.Left;
+        if (temp.Right != null) temp.Right.Parent = temp;
+        temp.Parent = node;
+        node.Left = temp;
+
+        return node;
+    }
+
+    private Node DoubleRedRotateRight(Node node, bool? parentNodePosition)
+    {
+        var temp = node;
+        node = temp.Left;
+        node.Parent = temp.Parent;
+        node = FixParent(node, parentNodePosition);
+        temp.Left = node.Right;
+        if (temp.Left != null) temp.Left.Parent = temp;
+        temp.Parent = node;
+        node.Right = temp;
+
+        return node;
+    }
 
     private void FixColors(Node node)
     {
@@ -340,6 +374,7 @@ public class RedBlackTree<T> : IBinarySearchTree<T> where T : IComparable
             node.Left = temp.Left;
 
         }
+
         node.Count = this.Count(node.Left) + this.Count(node.Right) + 1;
 
         return node;
@@ -483,23 +518,29 @@ public class Launcher
 {
     public static void Main(string[] args)
     {
-        bool? test = default(bool?);
-        bool? test1 = null;
         var rbt = new RedBlackTree<int>();
 
         rbt.Insert(3);
         rbt.Insert(1);
         rbt.Insert(5);
+        //ColorFlip
         rbt.Insert(7);
+        //Rotate R-L
+        //After Rotation Flip
         rbt.Insert(6);
 
-        //rbt.Insert(1);
-        //rbt.Insert(3);
-        //rbt.Insert(5);
-
-        //rbt.Insert(5);
-        //rbt.Insert(3);
-        //rbt.Insert(1);
+        //Color Flip
+        rbt.Insert(8);
+        //Left Rotate
+        rbt.Insert(9);
+        //Color Flip
+        //Left Rotation
+        rbt.Insert(10);
         ;
+        //End Result Tree:
+        //Root -> 6
+        //3, 8 RED
+        //1, 5, 7, 9 BLACK
+        //10 Red
     }
 }
