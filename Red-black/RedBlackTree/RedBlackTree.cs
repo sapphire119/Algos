@@ -7,14 +7,14 @@ public class RedBlackTree<T> : IBinarySearchTree<T> where T : IComparable
     private const bool Black = false;
 
     private Node root;
-    private static readonly Node ProxyNode =
-        new Node
-        {
-            Left = null,
-            Right = null,
-            Parent = null,
-            Color = Black
-        };
+    //private static readonly Node ProxyNode =
+    //    new Node
+    //    {
+    //        Left = null,
+    //        Right = null,
+    //        Parent = null,
+    //        Color = Black
+    //    };
 
     private Node FindElement(T element)
     {
@@ -347,8 +347,27 @@ public class RedBlackTree<T> : IBinarySearchTree<T> where T : IComparable
         }
 
         var nodeToBeDeleted = this.FindElement(element);
+        if (nodeToBeDeleted == this.root && nodeToBeDeleted.Left == null && nodeToBeDeleted.Right == null) this.root = null;
         if (nodeToBeDeleted == null) return;
+        
+        var replacementNode = this.FindReplacement(nodeToBeDeleted);
+        Node x = this.FindReplacement(nodeToBeDeleted);
+        if (nodeToBeDeleted.Left == null && nodeToBeDeleted.Right == null)
+        {
+            x = new Node(default, Black, nodeToBeDeleted);
+            nodeToBeDeleted.Right = x;
+        }
+        if (nodeToBeDeleted.Left != null && nodeToBeDeleted.Right != null)
+        {
+            if (replacementNode.Right == null)
+            {
+                x = new Node(default, Black, replacementNode);
+                replacementNode.Right = x;
+            }
+        }
 
+        this.Delete(element, this.root);
+        this.DeleteTempNode(x);
         //if (nodeToBeDeleted.Left == null && nodeToBeDeleted.Right == null)
         //{
         //    replacement.Right = ProxyNode;
@@ -359,30 +378,42 @@ public class RedBlackTree<T> : IBinarySearchTree<T> where T : IComparable
 
         //};
 
-        var replacement = this.FindReplacement(nodeToBeDeleted);
-        if (nodeToBeDeleted.Left == null && nodeToBeDeleted.Right == null)
-        {
-            replacement = ProxyNode;
-            replacement.Parent = nodeToBeDeleted;
-            //replacement.Parent.Right = replacement;
-        }
-        this.Delete(element, this.root);
-        
-        ;
+        //if (nodeToBeDeleted.Left == null && nodeToBeDeleted.Right == null)
+        //{
+        //    replacement = ProxyNode;
+        //    replacement.Parent = nodeToBeDeleted;
+        //    //replacement.Parent.Right = replacement;
+        //}
+
         //var replacement = this.Delete(nodeToDelete.Value, nodeToDelete);
-        //;
 
 
         //this.root = this.Delete(element, this.root);
-        ResetProxy();
+        //ResetProxy();
     }
 
-    private void ResetProxy()
+    private void DeleteTempNode(Node x)
     {
-        ProxyNode.Left = null;
-        ProxyNode.Right = null;
-        ProxyNode.Parent = null;
+        var temp = x.Parent;
+        if (temp.Left == x) temp.Left = null;
+        if (temp.Right == x) temp.Right = null;
+        //var tempCompare = temp.Value.CompareTo(x.Value);
+        //if (tempCompare < 0)
+        //{
+        //    temp.Left = null;
+        //}
+        //else
+        //{
+        //    temp.Right = null;
+        //}
     }
+
+    //private void ResetProxy()
+    //{
+    //    ProxyNode.Left = null;
+    //    ProxyNode.Right = null;
+    //    ProxyNode.Parent = null;
+    //}
 
     private Node FindReplacement(Node node)
     {
@@ -422,28 +453,29 @@ public class RedBlackTree<T> : IBinarySearchTree<T> where T : IComparable
         }
         else
         {
-            var replacement = this.FindReplacement(node);
-            if (replacement == null) return replacement;
+            //var replacement = this.FindReplacement(node);
+            //if (replacement == null) return replacement;
 
-            replacement.Right = this.DeleteMin(node.Right);
-            replacement.Left = node.Left;
-            node = BalanceNode(replacement, node);
-            //if (node.Right == null)
-            //{
-            //    return BalanceReplacement(node.Left, node);
-            //}
-            //if (node.Left == null)
-            //{
-            //    return BalanceReplacement(node.Right, node);
-            //}
+            //replacement.Right = this.DeleteMin(node.Right);
+            //replacement.Left = node.Left;
 
-            //Node temp = node;
-            //node = this.FindMin(temp.Right);
-            //node.Right = this.DeleteMin(temp.Right);
-            //node.Left = temp.Left;
-            //node = BalanceReplacement(node, temp);
-            ////node.Parent = temp.Parent;
-            ////CorrectChildParentRelation(node);
+            //node = BalanceNode(replacement, node);
+            if (node.Right == null)
+            {
+                return FixParentRelations(node.Left, node);
+            }
+            if (node.Left == null)
+            {
+                return FixParentRelations(node.Right, node);
+            }
+
+            Node temp = node;
+            node = this.FindMin(temp.Right);
+            node.Right = this.DeleteMin(temp.Right);
+            node.Left = temp.Left;
+            node = FixParentRelations(node, temp);
+            //node.Parent = temp.Parent;
+            //CorrectChildParentRelation(node);
         }
 
         node.Count = this.Count(node.Left) + this.Count(node.Right) + 1;
@@ -451,7 +483,7 @@ public class RedBlackTree<T> : IBinarySearchTree<T> where T : IComparable
         return node;
     }
 
-    private Node BalanceNode(Node replacement, Node node)
+    private Node FixParentRelations(Node replacement, Node node)
     {
         if (replacement == null) return replacement;
         replacement.Parent = node.Parent;
@@ -645,11 +677,7 @@ public class Launcher
 
         //rbt.Delete(30);
 
-        rbt.Insert(20);
         //rbt.Insert(10);
-        rbt.Insert(30);
-
-        rbt.Delete(20);
 
         //rbt.Insert(10);
         //rbt.Insert(20);
@@ -660,5 +688,18 @@ public class Launcher
         //rbt.Insert(8);
 
         //rbt.Delete(5);
+
+        rbt.Insert(13);
+        rbt.Insert(8);
+        rbt.Insert(17);
+        rbt.Insert(1);
+        rbt.Insert(11);
+        rbt.Insert(15);
+        rbt.Insert(25);
+        rbt.Insert(6);
+        rbt.Insert(22);
+        rbt.Insert(27);
+
+        rbt.Delete(6);
     }
 }
