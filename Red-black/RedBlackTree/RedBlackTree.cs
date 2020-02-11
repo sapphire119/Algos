@@ -172,7 +172,8 @@ public class RedBlackTree<T> : IBinarySearchTree<T> where T : IComparable
 
     private Node DoubleRotate(Node node)
     {
-        bool? parentNodePosition = node.Parent != null ? IsLeft(node) : default(bool?);
+        //node.Parent != null ? IsLeft(node) : default(bool?);
+        bool? parentNodePosition = IsParentNodeLeft(node);
         if (IsRed(node.Right) && IsRed(node.Right.Right))
         {
             return this.DoubleRedRotateLeft(node, parentNodePosition);
@@ -184,6 +185,11 @@ public class RedBlackTree<T> : IBinarySearchTree<T> where T : IComparable
         }
 
         return node;
+    }
+
+    private bool? IsParentNodeLeft(Node node)
+    {
+        return node.Parent != null ? IsLeft(node) : default(bool?);
     }
 
     private Node FixParent(Node node, bool? parentNodePosition)
@@ -350,7 +356,7 @@ public class RedBlackTree<T> : IBinarySearchTree<T> where T : IComparable
         var nodeToBeDeleted = this.FindElement(element);
         if (nodeToBeDeleted == this.root && nodeToBeDeleted.Left == null && nodeToBeDeleted.Right == null) this.root = null;
         if (nodeToBeDeleted == null) return;
-        
+
         var replacementNode = this.FindReplacement(nodeToBeDeleted);
 
         Node x = this.FindReplacement(nodeToBeDeleted);
@@ -384,12 +390,14 @@ public class RedBlackTree<T> : IBinarySearchTree<T> where T : IComparable
         {
             //Go to appropriate case
             replacementNode.Color = Red;
-            ReBalanceNode(x, replacementNode);
+            this.root = ReBalanceNode(this.root, x, x.Parent);
+            //ReBalanceNode(x, replacementNode);
         }
         if (!IsRed(nodeToBeDeleted) && !IsRed(replacementNode))
         {
             //Go to appropriate case
-            ReBalanceNode(x, replacementNode);
+            this.root = ReBalanceNode(this.root, x, x.Parent);
+            //ReBalanceNode(x, replacementNode);
         }
         if (!IsRed(nodeToBeDeleted) && IsRed(replacementNode)) replacementNode.Color = Black;
         this.ResetProxy(ProxyNode);
@@ -417,23 +425,54 @@ public class RedBlackTree<T> : IBinarySearchTree<T> where T : IComparable
         //ResetProxy();
     }
 
-    private void ReBalanceNode(Node x, Node replacementNode)
+    private Node ReBalanceNode(Node current, Node x, Node parent)
     {
-        if (IsRed(x))   
-        {
-            x.Color = Black;
-            return;
-        }
-        if (!IsRed(x) && IsRed(x.Aunt))
-        {
+        var comparison = parent.Value.CompareTo(current.Value);
 
-        }
-        if (!IsRed(x) && !IsRed(x.Aunt))
+        if (comparison < 0)
         {
-
+            current.Left = this.ReBalanceNode(current.Left, x, parent);
         }
+        else if (comparison > 0)
+        {
+            current.Right = this.ReBalanceNode(current.Right, x, parent);
+        }
+        else
+        {
+            //parentNode == currentNode
+            if (IsRed(x))
+            {
+                x.Color = Black;
+            }
+            else if (!IsRed(x) && IsRed(x.Aunt))
+            {
+
+            }
+            else if (!IsRed(x) && !IsRed(x.Aunt) && !IsRed(x.Aunt.Left) && !IsRed(x.Aunt.Right))
+            {
+                //null reference possible
+                var sibling = x.Aunt;
+                sibling.Color = Red;
+
+                x = parent;
+                if (IsRed(x))
+                {
+                    x.Color = Black;
+                }
+                else
+                {
+                    //ReBalanceNode(x, x.Parent);
+                }
+            }
+            //else if (IsRed())
+            //{
+
+            //}
+        }
+
+        return current;
     }
-
+    
     private void ResetProxy(Node proxy)
     {
         if (proxy.Parent == null) return;
@@ -732,22 +771,33 @@ public class Launcher
 
         //rbt.Delete(5);
 
-        rbt.Insert(13);
-        rbt.Insert(8);
-        rbt.Insert(17);
-        rbt.Insert(1);
-        rbt.Insert(11);
-        rbt.Insert(15);
-        rbt.Insert(25);
-        rbt.Insert(6);
-        rbt.Insert(22);
-        rbt.Insert(27);
+        //rbt.Insert(13);
+        //rbt.Insert(8);
+        //rbt.Insert(17);
+        //rbt.Insert(1);
+        //rbt.Insert(11);
+        //rbt.Insert(15);
+        //rbt.Insert(25);
+        //rbt.Insert(6);
+        //rbt.Insert(22);
+        //rbt.Insert(27);
 
-        //rbt.Delete(6);
-        //rbt.Delete(1);
-        ;
-        rbt.Delete(13);
+        ////rbt.Delete(6);
+        ////rbt.Delete(1);
+        //;
+        //rbt.Delete(13);
 
+        //rbt.Insert(5);
+        //rbt.Insert(2);
+        //rbt.Insert(8);
+        //rbt.Insert(1);
+        //rbt.Insert(4);
+        //rbt.Insert(7);
+        //rbt.Insert(9);
+        //rbt.Insert(3);
+
+        //rbt.Delete(3);
+        //rbt.Delete(2);
         //rbt.Insert(7);
         //rbt.Insert(3);
         //rbt.Insert(18);
@@ -758,5 +808,16 @@ public class Launcher
         //rbt.Insert(26);
 
         //rbt.Delete(18);
+
+        rbt.Insert(7);
+        rbt.Insert(3);
+        rbt.Insert(18);
+        rbt.Insert(10);
+        rbt.Insert(22);
+        rbt.Insert(8);
+        rbt.Insert(11);
+        rbt.Insert(26);
+
+        rbt.Delete(18);
     }
 }
