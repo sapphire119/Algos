@@ -328,7 +328,6 @@ public class RedBlackTree<T> : IBinarySearchTree<T> where T : IComparable
         if (node.Left == null)
         {
             return FixParentRelations(node.Right, node);
-            //return node.Right;
         }
 
         node.Left = this.DeleteMin(node.Left);
@@ -395,38 +394,14 @@ public class RedBlackTree<T> : IBinarySearchTree<T> where T : IComparable
             //Go to appropriate case
             replacementNode.Color = Red;
             this.root = ReBalanceNode(this.root, x, x.Parent);
-            //ReBalanceNode(x, replacementNode);
         }
         if (!IsRed(nodeToBeDeleted) && !IsRed(replacementNode))
         {
             //Go to appropriate case
             this.root = ReBalanceNode(this.root, x, x.Parent);
-            //ReBalanceNode(x, replacementNode);
         }
         if (!IsRed(nodeToBeDeleted) && IsRed(replacementNode)) replacementNode.Color = Black;
         this.ResetProxy(ProxyNode);
-        //if (nodeToBeDeleted.Left == null && nodeToBeDeleted.Right == null)
-        //{
-        //    replacement.Right = ProxyNode;
-        //    replacement.Right.Parent = replacement;
-        //}
-        //else if (nodeToBeDeleted.Left != null && nodeToBeDeleted.Right != null)
-        //{
-
-        //};
-
-        //if (nodeToBeDeleted.Left == null && nodeToBeDeleted.Right == null)
-        //{
-        //    replacement = ProxyNode;
-        //    replacement.Parent = nodeToBeDeleted;
-        //    //replacement.Parent.Right = replacement;
-        //}
-
-        //var replacement = this.Delete(nodeToDelete.Value, nodeToDelete);
-
-
-        //this.root = this.Delete(element, this.root);
-        //ResetProxy();
     }
 
     private Node ReBalanceNode(Node current, Node x, Node parent)
@@ -443,49 +418,7 @@ public class RedBlackTree<T> : IBinarySearchTree<T> where T : IComparable
         }
         else
         {
-            //parentNode == currentNode
             current = FixNodeAfterDeletion(current, x, parent);
-            //if (IsRed(x))
-            //{
-            //    x.Color = Black;
-            //}
-            //else if (!IsRed(x) && IsRed(x.Aunt))
-            //{
-            //    var sibling = x.Aunt;
-            //    sibling.Color = Black;
-
-            //    //x.Parent.Color = Red;
-            //    current.Color = Red;
-            //    if (IsLeft(x))
-            //    {
-            //        current = this.DoubleRedRotateLeft(current, IsParentNodeLeft(current));
-            //    }
-            //    else
-            //    {
-            //        current = this.DoubleRedRotateRight(current, IsParentNodeLeft(current));
-            //    }
-            //    //Recurse back to checks
-            //}
-            //else if (!IsRed(x) && !IsRed(x.Aunt) && !IsRed(x.Aunt.Left) && !IsRed(x.Aunt.Right))
-            //{
-            //    //null reference possible
-            //    var sibling = x.Aunt;
-            //    sibling.Color = Red;
-
-            //    x = parent;
-            //    if (IsRed(x))
-            //    {
-            //        x.Color = Black;
-            //    }
-            //    else
-            //    {
-            //        //ReBalanceNode(x, x.Parent);
-            //    }
-            //}
-            //else if (IsRed())
-            //{
-
-            //}
         }
 
         return current;
@@ -567,10 +500,6 @@ public class RedBlackTree<T> : IBinarySearchTree<T> where T : IComparable
                     sibling = this.RotateLeft(sibling);
                 }
             }
-            //else if (!IsLeft(x) && IsRed(x.Aunt.Right) && !IsRed(x.Aunt.Left))
-            //{
-
-            //}
             //case 4
             if (IsLeft(x) && IsRed(x.Aunt.Right) ||
                 !IsLeft(x) && IsRed(x.Aunt.Left))
@@ -591,10 +520,6 @@ public class RedBlackTree<T> : IBinarySearchTree<T> where T : IComparable
                     node = this.DoubleRedRotateRight(node, parentNodePosition);
                 }
             }
-            //else if (!IsLeft(x) && IsRed(x.Aunt.Left))
-            //{
-
-            //}
 
         }
 
@@ -607,23 +532,7 @@ public class RedBlackTree<T> : IBinarySearchTree<T> where T : IComparable
         var temp = proxy.Parent;
         if (temp.Left == proxy) temp.Left = null;
         if (temp.Right == proxy) temp.Right = null;
-        //var tempCompare = temp.Value.CompareTo(x.Value);
-        //if (tempCompare < 0)
-        //{
-        //    temp.Left = null;
-        //}
-        //else
-        //{
-        //    temp.Right = null;
-        //}
     }
-
-    //private void ResetProxy()
-    //{
-    //    ProxyNode.Left = null;
-    //    ProxyNode.Right = null;
-    //    ProxyNode.Parent = null;
-    //}
 
     private Node FindReplacement(Node node)
     {
@@ -635,11 +544,6 @@ public class RedBlackTree<T> : IBinarySearchTree<T> where T : IComparable
         {
             return node.Right;
         }
-
-        //Node temp = node;
-        //node = this.FindMin(temp.Right);
-        //node.Right = this.DeleteMin(temp.Right);
-        //node.Left = temp.Left;
 
         return this.FindMin(node.Right);
     }
@@ -663,13 +567,6 @@ public class RedBlackTree<T> : IBinarySearchTree<T> where T : IComparable
         }
         else
         {
-            //var replacement = this.FindReplacement(node);
-            //if (replacement == null) return replacement;
-
-            //replacement.Right = this.DeleteMin(node.Right);
-            //replacement.Left = node.Left;
-
-            //node = BalanceNode(replacement, node);
             if (node.Right == null)
             {
                 return FixParentRelations(node.Left, node);
@@ -684,8 +581,6 @@ public class RedBlackTree<T> : IBinarySearchTree<T> where T : IComparable
             node.Right = this.DeleteMin(temp.Right);
             node.Left = temp.Left;
             node = FixParentRelations(node, temp);
-            //node.Parent = temp.Parent;
-            //CorrectChildParentRelation(node);
         }
 
         node.Count = this.Count(node.Left) + this.Count(node.Right) + 1;
@@ -702,11 +597,6 @@ public class RedBlackTree<T> : IBinarySearchTree<T> where T : IComparable
         return replacement;
     }
 
-    //private void CorrectChildParentRelation(Node node)
-    //{
-    //    if (node.Left != null) node.Left.Parent = node;
-    //    if (node.Right != null) node.Right.Parent = node;
-    //}
 
     private Node FindMin(Node node)
     {
