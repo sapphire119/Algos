@@ -348,14 +348,18 @@ public class RedBlackTree<T> : IBinarySearchTree<T> where T : IComparable
 
     public virtual void Delete(T element)
     {
+        var nodeToBeDeleted = this.FindElement(element);
+        if (this.root != null && 
+            nodeToBeDeleted == this.root && 
+            nodeToBeDeleted.Left == null && 
+            nodeToBeDeleted.Right == null) 
+                this.root = null;
+
         if (this.root == null)
         {
             throw new InvalidOperationException();
         }
 
-        var nodeToBeDeleted = this.FindElement(element);
-        if (nodeToBeDeleted == this.root && nodeToBeDeleted.Left == null && nodeToBeDeleted.Right == null) this.root = null;
-        if (nodeToBeDeleted == null) return;
 
         var replacementNode = this.FindReplacement(nodeToBeDeleted);
 
@@ -517,7 +521,8 @@ public class RedBlackTree<T> : IBinarySearchTree<T> where T : IComparable
             //Recurse back to checks
         }
         //case 2
-        else if (!IsRed(x) && !IsRed(x.Aunt) && !IsRed(x.Aunt.Left) && !IsRed(x.Aunt.Right))
+        //x.Aunt != null since it can be root
+        else if (!IsRed(x) && x.Aunt != null && !IsRed(x.Aunt) && !IsRed(x.Aunt.Left) && !IsRed(x.Aunt.Right))
         {
             //null reference possible
             var sibling = x.Aunt;
@@ -535,30 +540,31 @@ public class RedBlackTree<T> : IBinarySearchTree<T> where T : IComparable
             }
         }
         //case 3, 4
-        else if(!IsRed(x) && !IsRed(x.Aunt))
+        //x.Aunt != null since it can be root
+        else if (!IsRed(x) && !IsRed(x.Aunt) && x.Aunt != null)
         {
             //case 3
             if (IsLeft(x) && IsRed(x.Aunt.Left) && !IsRed(x.Aunt.Right) ||
                 !IsLeft(x) && IsRed(x.Aunt.Right) && !IsRed(x.Aunt.Left))
             {
-                var temp = x.Aunt;
+                var sibling = x.Aunt;
                 var isXLeft = IsLeft(x);
                 if (isXLeft)
                 {
-                    temp.Left.Color = Black;
+                    sibling.Left.Color = Black;
                 }
                 else
                 {
-                    temp.Right.Color = Black;
+                    sibling.Right.Color = Black;
                 }
-                temp.Color = Red;
+                sibling.Color = Red;
                 if (isXLeft)
                 {
-                    temp = this.RotateRight(temp);
+                    sibling = this.RotateRight(sibling);
                 }
                 else
                 {
-                    temp = this.RotateLeft(temp);
+                    sibling = this.RotateLeft(sibling);
                 }
             }
             //else if (!IsLeft(x) && IsRed(x.Aunt.Right) && !IsRed(x.Aunt.Left))
@@ -844,7 +850,13 @@ public class Launcher
     public static void Main(string[] args)
     {
         var rbt = new RedBlackTree<int>();
+        rbt.Insert(20);
+        rbt.Insert(10);
+        rbt.Insert(30);
+        rbt.Insert(5);
 
+        rbt.Delete(5);
+        rbt.Delete(10);
         //rbt.Insert(3);
         //rbt.Insert(1);
         //rbt.Insert(5);
@@ -893,19 +905,20 @@ public class Launcher
 
         //rbt.Delete(5);
 
-        rbt.Insert(13);
-        rbt.Insert(8);
-        rbt.Insert(17);
-        rbt.Insert(1);
-        rbt.Insert(11);
-        rbt.Insert(15);
-        rbt.Insert(25);
-        rbt.Insert(6);
-        rbt.Insert(22);
-        rbt.Insert(27);
+        //rbt.Insert(13);
+        //rbt.Insert(8);
+        //rbt.Insert(17);
+        //rbt.Insert(1);
+        //rbt.Insert(11);
+        //rbt.Insert(15);
+        //rbt.Insert(25);
+        //rbt.Insert(6);
+        //rbt.Insert(22);
+        //rbt.Insert(27);
 
-        rbt.Delete(11);
-        ////rbt.Delete(6);
+        //rbt.Delete(11);
+        //rbt.Delete(6);
+        ;
         ////rbt.Delete(1);
         //;
         //rbt.Delete(13);
@@ -921,6 +934,7 @@ public class Launcher
 
         //rbt.Delete(3);
         //rbt.Delete(2);
+
         //rbt.Insert(7);
         //rbt.Insert(3);
         //rbt.Insert(18);
@@ -932,15 +946,16 @@ public class Launcher
 
         //rbt.Delete(18);
 
-        rbt.Insert(7);
-        rbt.Insert(3);
-        rbt.Insert(18);
-        rbt.Insert(10);
-        rbt.Insert(22);
-        rbt.Insert(8);
-        rbt.Insert(11);
-        rbt.Insert(26);
+        //rbt.Insert(7);
+        //rbt.Insert(3);
+        //rbt.Insert(18);
+        //rbt.Insert(10);
+        //rbt.Insert(22);
+        //rbt.Insert(8);
+        //rbt.Insert(11);
+        //rbt.Insert(26);
 
-        rbt.Delete(3);
+        //rbt.Delete(3);
+        ;
     }
 }

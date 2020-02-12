@@ -52,6 +52,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CorrectnessTests\DeleteCases.cs" />
     <Compile Include="CorrectnessTests\InsertFirst.cs" />
     <Compile Include="CorrectnessTests\InsertSecond.cs" />
     <Compile Include="CorrectnessTests\InsertThird.cs" />
