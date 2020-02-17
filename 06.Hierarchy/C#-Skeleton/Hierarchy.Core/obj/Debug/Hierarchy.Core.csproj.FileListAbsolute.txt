@@ -1,0 +1,9 @@
+D:\repos\office-data-algos\06.Hierarchy\C#-Skeleton\Hierarchy.Core\bin\Debug\Hierarchy.Core.exe.config
+D:\repos\office-data-algos\06.Hierarchy\C#-Skeleton\Hierarchy.Core\bin\Debug\Hierarchy.Core.exe
+D:\repos\office-data-algos\06.Hierarchy\C#-Skeleton\Hierarchy.Core\bin\Debug\Hierarchy.Core.pdb
+D:\repos\office-data-algos\06.Hierarchy\C#-Skeleton\Hierarchy.Core\bin\Debug\SoftUni.Wintellect.PowerCollections.dll
+D:\repos\office-data-algos\06.Hierarchy\C#-Skeleton\Hierarchy.Core\bin\Debug\SoftUni.Wintellect.PowerCollections.xml
+D:\repos\office-data-algos\06.Hierarchy\C#-Skeleton\Hierarchy.Core\obj\Debug\Hierarchy.Core.csprojAssemblyReference.cache
+D:\repos\office-data-algos\06.Hierarchy\C#-Skeleton\Hierarchy.Core\obj\Debug\Hierarchy.Core.csproj.CopyComplete
+D:\repos\office-data-algos\06.Hierarchy\C#-Skeleton\Hierarchy.Core\obj\Debug\Hierarchy.Core.exe
+D:\repos\office-data-algos\06.Hierarchy\C#-Skeleton\Hierarchy.Core\obj\Debug\Hierarchy.Core.pdb

@@ -14,6 +14,13 @@
             hierarchy.Add("General Protos", "Subotli");
             hierarchy.Add("General Protos", "Kira");
             hierarchy.Add("General Protos", "Zaler");
+            //hierarchy.Add("Kira", "test1");
+            //hierarchy.Add("Kira", "test2");
+            //hierarchy.Add("Kira", "test3");
+            //hierarchy.Add("test3", "Depth4");
+            //var test = hierarchy.Count;
+            //hierarchy.GetParent("Leonidas");
+            //hierarchy.GetParent("Bai ivan");
 
             var children = hierarchy.GetChildren("Leonidas");
             Console.WriteLine(string.Join(", ", children));
