@@ -7,3 +7,12 @@ D:\repos\office-data-algos\06.Hierarchy\C#-Skeleton\Hierarchy.Tests\obj\Debug\Hi
 D:\repos\office-data-algos\06.Hierarchy\C#-Skeleton\Hierarchy.Tests\obj\Debug\Hierarchy.Tests.csproj.CopyComplete
 D:\repos\office-data-algos\06.Hierarchy\C#-Skeleton\Hierarchy.Tests\obj\Debug\Hierarchy.Tests.dll
 D:\repos\office-data-algos\06.Hierarchy\C#-Skeleton\Hierarchy.Tests\obj\Debug\Hierarchy.Tests.pdb
+C:\repos\office-data-algos\06.Hierarchy\C#-Skeleton\Hierarchy.Tests\bin\Debug\Hierarchy.Tests.dll
+C:\repos\office-data-algos\06.Hierarchy\C#-Skeleton\Hierarchy.Tests\bin\Debug\Hierarchy.Tests.pdb
+C:\repos\office-data-algos\06.Hierarchy\C#-Skeleton\Hierarchy.Tests\bin\Debug\Hierarchy.Core.exe
+C:\repos\office-data-algos\06.Hierarchy\C#-Skeleton\Hierarchy.Tests\bin\Debug\Hierarchy.Core.pdb
+C:\repos\office-data-algos\06.Hierarchy\C#-Skeleton\Hierarchy.Tests\bin\Debug\Hierarchy.Core.exe.config
+C:\repos\office-data-algos\06.Hierarchy\C#-Skeleton\Hierarchy.Tests\obj\Debug\Hierarchy.Tests.csprojAssemblyReference.cache
+C:\repos\office-data-algos\06.Hierarchy\C#-Skeleton\Hierarchy.Tests\obj\Debug\Hierarchy.Tests.csproj.CopyComplete
+C:\repos\office-data-algos\06.Hierarchy\C#-Skeleton\Hierarchy.Tests\obj\Debug\Hierarchy.Tests.dll
+C:\repos\office-data-algos\06.Hierarchy\C#-Skeleton\Hierarchy.Tests\obj\Debug\Hierarchy.Tests.pdb

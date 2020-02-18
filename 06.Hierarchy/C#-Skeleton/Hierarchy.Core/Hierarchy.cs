@@ -9,13 +9,15 @@
     {
         //private Node<T> root;
         private Dictionary<T, Node<T>> hierarchy;
+        private int lastElementIndex = 1;
 
         public Hierarchy(T root)
         {
             //this.root = new Node<T>(root);
             this.hierarchy = new Dictionary<T, Node<T>>();
             //key -- parent
-            this.hierarchy.Add(root, null);
+            //TODO Refactor
+            this.hierarchy.Add(root, new Node<T>(root));
         }
 
         public int Count
@@ -52,10 +54,13 @@
                 throw new ArgumentException();
             }
 
-
-            var currentElement = this.GetElement(element, this.root);
-            var childNode = new Node<T>(child, currentElement);
-            currentElement.Children.Add(childNode);
+            //var parentNode = this.hierarchy[element];
+            this.hierarchy.Add(new Node<T>(child), element);
+            lastElementIndex++;
+            //this.hierarchy.Add(child, new Node<T>())
+            //var currentElement = this.GetElement(element, this.root);
+            //var childNode = new Node<T>(child, currentElement);
+            //currentElement.Children.Add(childNode);
             //currentElement.Count = currentElement.Children.Count;
         }
 
@@ -92,10 +97,13 @@
             {
                 throw new ArgumentException();
             }
-            var element = this.GetElement(item, this.root);
-            var childElements = element.Children.Select(e => e.Value);
 
-            return childElements;
+            //this.
+            //var element = this.GetElement(item, this.root);
+            //var childElements = element.Children.Select(e => e.Value);
+
+            return default;
+            //return childElements;
         }
 
         public T GetParent(T item)
@@ -104,20 +112,22 @@
             {
                 throw new ArgumentException();
             }
-            var parentNode = this.hierarchy[item];
-            
+
+            var parent = this.hierarchy[item];
+            return parent;
             //var element = this.GetElement(item, this.root);
             //if (!element.Value.Equals(item))
             //{
             //    throw new ArgumentException();
             //}
 
-            return parentNode == null ? default(T) : parentNode.Value;
+            //return parentNode == null ? default(T) : parentNode.Value;
         }
 
         public bool Contains(T value)
         {
-            return this.hierarchy.ContainsKey(value);
+            this.hierarchy[]
+            //return this.hierarchy.ContainsKey(key => key.Value == value);
             //var element = this.GetElement(value, this.root);
             //if (element.Value.Equals(value))
             //{

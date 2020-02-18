@@ -11,8 +11,20 @@
         public Node(T value)
         {
             this.Value = value;
+            this.Children = new List<Node<T>>();
         }
 
+        public Node(T value, T parent)
+            :this(value)
+        {
+            this.Parent = new Node<T>(parent);
+        }
+
+        public T Value { get; set; }
+
+        public List<Node<T>> Children { get; set; }
+
+        public Node<T> Parent { get; set; }
         //public Node(T value, Node<T> parent)
         //    :this(value)
         //{
@@ -30,7 +42,6 @@
         //    this.Parent = parent;
         //}
 
-        public T Value { get; set; }
         //public Node<T> Parent { get; set; }
         //public List<Node<T>> Children { get; set; }
     }
