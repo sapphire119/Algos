@@ -22,15 +22,17 @@
             //hierarchy.GetParent("Leonidas");
             //hierarchy.GetParent("Bai ivan");
 
-            var children = hierarchy.GetChildren("Leonidas");
-            Console.WriteLine(string.Join(", ", children));
+            //hierarchy.Remove("General Protos");
 
-            var parent = hierarchy.GetParent("Kira");
-            Console.WriteLine(parent);
+            //var children = hierarchy.GetChildren("Leonidas");
+            //Console.WriteLine(string.Join(", ", children));
+
+            //var parent = hierarchy.GetParent("Kira");
+            //Console.WriteLine(parent);
 
             hierarchy.Remove("General Protos");
-            children = hierarchy.GetChildren("Leonidas");
-            Console.WriteLine(string.Join(", ", children));
+            //children = hierarchy.GetChildren("Leonidas");
+            //Console.WriteLine(string.Join(", ", children));
 
             foreach (var item in hierarchy)
             {

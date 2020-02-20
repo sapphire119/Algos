@@ -9,15 +9,17 @@
     {
         //private Node<T> root;
         private Dictionary<T, Node<T>> hierarchy;
-        private int lastElementIndex = 1;
+        private T root;
+        //private int lastElementCount = 1;
 
         public Hierarchy(T root)
         {
-            //this.root = new Node<T>(root);
+            this.root = root;
             this.hierarchy = new Dictionary<T, Node<T>>();
+            this.hierarchy.Add(root, new Node<T>(root));
+            //this.root = new Node<T>(root);
             //key -- parent
             //TODO Refactor
-            this.hierarchy.Add(root, new Node<T>(root));
         }
 
         public int Count
@@ -54,9 +56,14 @@
                 throw new ArgumentException();
             }
 
+            var elementNode = this.hierarchy[element];
+            var childNode = new Node<T>(child, elementNode);
+            elementNode.Children.Add(childNode);
+            this.hierarchy.Add(child, childNode);
+
+            //lastElementCount++;
             //var parentNode = this.hierarchy[element];
-            this.hierarchy.Add(new Node<T>(child), element);
-            lastElementIndex++;
+            //this.hierarchy.Add(element);
             //this.hierarchy.Add(child, new Node<T>())
             //var currentElement = this.GetElement(element, this.root);
             //var childNode = new Node<T>(child, currentElement);
@@ -87,8 +94,35 @@
 
         public void Remove(T element)
         {
+            if (element.Equals(this.root))
+            {
+                throw new InvalidOperationException();
+            }
+            if (!this.Contains(element))
+            {
+                throw new ArgumentException();
+            }
+            var elementToRemove = this.hierarchy[element];
+            var parentNode = elementToRemove.Parent;
+            parentNode.Children.Remove(elementToRemove);
+            if (elementToRemove.Children.Count > 0)
+            {
+                foreach (var childNode in elementToRemove.Children)
+                {
+                    childNode.Parent = parentNode;
+                    childNode.Depth = parentNode.Depth + 1;
+                }
+                parentNode.Children.AddRange(elementToRemove.Children);
+            }
+
+            //if (elementToRemove.Parent != null)
+            //{
+                
+            //}
             //TODO Add Remove logic
-            throw new NotImplementedException();
+            //Check for Reference deletion from List
+            this.hierarchy.Remove(element);
+            //throw new NotImplementedException();
         }
 
         public IEnumerable<T> GetChildren(T item)
@@ -98,11 +132,13 @@
                 throw new ArgumentException();
             }
 
+            var currentElementNode = this.hierarchy[item];
+            var childrenElemnts = currentElementNode.Children.Select(e => e.Value);
             //this.
             //var element = this.GetElement(item, this.root);
             //var childElements = element.Children.Select(e => e.Value);
 
-            return default;
+            return childrenElemnts;
             //return childElements;
         }
 
@@ -113,8 +149,11 @@
                 throw new ArgumentException();
             }
 
-            var parent = this.hierarchy[item];
-            return parent;
+            var currentEleNode = this.hierarchy[item];
+            var parentValue = currentEleNode.Parent != null ? currentEleNode.Parent.Value : default(T);
+
+            return parentValue;
+            //return parent;
             //var element = this.GetElement(item, this.root);
             //if (!element.Value.Equals(item))
             //{
@@ -126,7 +165,8 @@
 
         public bool Contains(T value)
         {
-            this.hierarchy[]
+            return this.hierarchy.ContainsKey(value);
+            //this.hierarchy[]
             //return this.hierarchy.ContainsKey(key => key.Value == value);
             //var element = this.GetElement(value, this.root);
             //if (element.Value.Equals(value))
@@ -139,18 +179,41 @@
 
         public IEnumerable<T> GetCommonElements(Hierarchy<T> other)
         {
-            var test = new Dictionary<T, Node<T>>();
-
+            var collection = this.Intersect(other);
+            return collection;
             //TODO Add GetCommonElements logic
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         public IEnumerator<T> GetEnumerator()
         {
-            //TODO Add GetEnumerator logic
+            var rootNode = this.hierarchy[this.root];
+            //5
+            //5 Children -> In order of entry -> 50, 70
+            //50 Children --> ---||----|| --> 200, 300
 
-            throw new NotImplementedException();
+
+            //var temp = this.hierarchy
+            //    .OrderBy(x => x.Value.Depth)
+            //    .ToDictionary(x => x.Key, x => x.Value);
+
+
+            ////var rootNode = this.hierarchy[this.root];
+
+            //foreach (var key in temp.Keys)
+            //{
+            //    yield return key;
+            //}
+
+            yield return default;
+            //yield return default;
+            //foreach (var key in this.hierarchy.Keys)
+            //{
+            //    yield return key;
+            //}
         }
+
+        //private IEnumerable<T>
 
         IEnumerator IEnumerable.GetEnumerator()
         {

@@ -55,7 +55,6 @@
 
             Stopwatch timer = new Stopwatch();
             timer.Start();
-
             CollectionAssert.AreEqual(common, hierarchy.GetCommonElements(hierarchy2).ToArray(), "GetCommonElements method returned incorrect collection!");
 
             timer.Stop();

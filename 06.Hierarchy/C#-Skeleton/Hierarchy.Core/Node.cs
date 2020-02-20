@@ -12,12 +12,14 @@
         {
             this.Value = value;
             this.Children = new List<Node<T>>();
+            this.Depth = 0;
         }
 
-        public Node(T value, T parent)
-            :this(value)
+        public Node(T value, Node<T> parent)
+            : this(value)
         {
-            this.Parent = new Node<T>(parent);
+            this.Parent = parent;
+            this.Depth = parent.Depth + 1;
         }
 
         public T Value { get; set; }
@@ -25,6 +27,8 @@
         public List<Node<T>> Children { get; set; }
 
         public Node<T> Parent { get; set; }
+
+        public int Depth { get; set; }
         //public Node(T value, Node<T> parent)
         //    :this(value)
         //{
