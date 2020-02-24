@@ -188,7 +188,20 @@
         public IEnumerator<T> GetEnumerator()
         {
             var rootNode = this.hierarchy[this.root];
-            //5
+
+            var children = new Queue<Node<T>>();
+            children.Enqueue(rootNode);
+
+            while (children.Count > 0)
+            {
+                var currentElement = children.Dequeue();
+                yield return currentElement.Value;
+
+                foreach (var child in currentElement.Children)
+                {
+                    children.Enqueue(child);
+                }
+            }
             //5 Children -> In order of entry -> 50, 70
             //50 Children --> ---||----|| --> 200, 300
 
@@ -204,8 +217,6 @@
             //{
             //    yield return key;
             //}
-
-            yield return default;
             //yield return default;
             //foreach (var key in this.hierarchy.Keys)
             //{

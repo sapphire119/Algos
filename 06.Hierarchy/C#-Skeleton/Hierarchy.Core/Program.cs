@@ -6,14 +6,27 @@
     {
         static void Main()
         {
-            var hierarchy = new Hierarchy<string>("Leonidas");
-            hierarchy.Add("Leonidas", "Xena The Princess Warrior");
-            hierarchy.Add("Leonidas", "General Protos");
-            hierarchy.Add("Xena The Princess Warrior", "Gorok");
-            hierarchy.Add("Xena The Princess Warrior", "Bozot");
-            hierarchy.Add("General Protos", "Subotli");
-            hierarchy.Add("General Protos", "Kira");
-            hierarchy.Add("General Protos", "Zaler");
+
+            //var hierarchy = new Hierarchy<string>("Leonidas");
+            var hierarchy = new Hierarchy<int>(5);
+            hierarchy.Add(5, 50);
+            hierarchy.Add(5, 70);
+            hierarchy.Add(70, 100);
+            hierarchy.Add(50, 200);
+            hierarchy.Add(70, 120);
+            hierarchy.Add(70, 110);
+            hierarchy.Add(110, 0);
+            hierarchy.Add(200, 201);
+            hierarchy.Add(201, 202);
+            hierarchy.Add(50, 300);
+
+            //hierarchy.Add("Leonidas", "Xena The Princess Warrior");
+            //hierarchy.Add("Leonidas", "General Protos");
+            //hierarchy.Add("Xena The Princess Warrior", "Gorok");
+            //hierarchy.Add("Xena The Princess Warrior", "Bozot");
+            //hierarchy.Add("General Protos", "Subotli");
+            //hierarchy.Add("General Protos", "Kira");
+            //hierarchy.Add("General Protos", "Zaler");
             //hierarchy.Add("Kira", "test1");
             //hierarchy.Add("Kira", "test2");
             //hierarchy.Add("Kira", "test3");
@@ -30,7 +43,7 @@
             //var parent = hierarchy.GetParent("Kira");
             //Console.WriteLine(parent);
 
-            hierarchy.Remove("General Protos");
+            //hierarchy.Remove("General Protos");
             //children = hierarchy.GetChildren("Leonidas");
             //Console.WriteLine(string.Join(", ", children));
 
