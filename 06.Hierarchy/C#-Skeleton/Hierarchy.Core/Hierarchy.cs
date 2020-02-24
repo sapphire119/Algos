@@ -179,7 +179,7 @@
 
         public IEnumerable<T> GetCommonElements(Hierarchy<T> other)
         {
-            var collection = this.Intersect(other);
+            var collection = this.hierarchy.Keys.Intersect(other.hierarchy.Keys);
             return collection;
             //TODO Add GetCommonElements logic
             //throw new NotImplementedException();
