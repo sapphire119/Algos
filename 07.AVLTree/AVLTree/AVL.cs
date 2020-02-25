@@ -53,7 +53,7 @@ public class AVL<T> where T : IComparable<T>
         {
             var tempChild = GetNodeChild(node);
             var childBalanceFactor = this.BalanceFactor(tempChild.Left, tempChild.Right);
-            
+
             //sign can be equal to 0
             //consider
             var signOfParent = Math.Sign(balanceFactor);
@@ -72,19 +72,61 @@ public class AVL<T> where T : IComparable<T>
         {
             var childPosition = this.GetChildPosition(node, child);
 
-            child = this.Rotation(child, signOfChild);
+            child = this.ChildRotation(child, signOfChild);
             if (childPosition) node.Left = child;
             else node.Right = child;
         }
 
         node = this.Rotation(node, signOfParent);
 
-        return node; 
+        return node;
     }
 
     private bool GetChildPosition(Node<T> node, Node<T> child)
     {
         return node.Left == child;
+    }
+
+    private Node<T> ChildRotation(Node<T> node, int childSign)
+    {
+        if (childSign < 0)
+        {
+            node = this.RotateLeftChild(node);
+        }
+        else if (childSign > 0)
+        {
+            node = this.RotateRightChild(node);
+        }
+
+        return node;
+    }
+
+    private Node<T> RotateRightChild(Node<T> node)
+    {
+        var temp = node;
+        node = temp.Left;
+        node.Height = temp.Height;
+        temp.Height = node.Height - 1;
+        temp.Left = null;
+        temp.Right = null;
+
+        node.Right = temp;
+
+        return node;
+    }
+
+    private Node<T> RotateLeftChild(Node<T> node)
+    {
+        var temp = node;
+        node = temp.Right;
+        node.Height = temp.Height;
+        temp.Height = node.Height - 1;
+        temp.Left = null;
+        temp.Right = null;
+
+        node.Left = temp;
+
+        return node;
     }
 
     private Node<T> Rotation(Node<T> node, int signOfElement)
@@ -107,11 +149,14 @@ public class AVL<T> where T : IComparable<T>
     {
         var temp = node;
         node = temp.Right;
+
         //node.Height = temp.Right.Height;
         temp.Height = node.Height - 1;
+        //node.Height = temp.Height;
 
         temp.Right = null;
         temp.Left = null;
+
         if (node.Left != null) temp.Right = node.Left;
         node.Left = temp;
 
@@ -154,8 +199,18 @@ public class AVL<T> where T : IComparable<T>
 
     private int FixHeight(Node<T> node)
     {
-        return node.Left != null ? 1 + node.Left.Height :
-            node.Right != null ? 1 + node.Right.Height : node.Height;
+        var leftNodeHeight = this.HeightOfNode(node.Left);
+        var rightNodeHeight = this.HeightOfNode(node.Right);
+
+        if (node.Left != null || node.Right != null)
+        {
+            var currentHeight = Math.Max(leftNodeHeight, rightNodeHeight) + 1;
+            return currentHeight;
+        }
+
+        return node.Height;
+        //return node.Left != null ? 1 + node.Left.Height :
+        //    node.Right != null ? 1 + node.Right.Height : node.Height;
     }
 
     private int BalanceFactor(Node<T> leftNode, Node<T> rightNode)
