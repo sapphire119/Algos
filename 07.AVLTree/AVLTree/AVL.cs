@@ -46,6 +46,11 @@ public class AVL<T> where T : IComparable<T>
 
     private Node<T> Balance(Node<T> node)
     {
+        if (node == null)
+        {
+            return default;
+        }
+
         node.Height = FixHeight(node);
 
         var balanceFactor = this.BalanceFactor(node.Left, node.Right);
@@ -158,8 +163,10 @@ public class AVL<T> where T : IComparable<T>
         temp.Right = null;
         //temp.Left = null;
 
-        if (node.Left != null) temp.Right = node.Left;
+        if (node.Left != null) { temp.Right = node.Left; temp.Height = FixHeight(temp); }
         node.Left = temp;
+
+        node.Height = FixHeight(node);
 
         return node;
     }
@@ -173,8 +180,10 @@ public class AVL<T> where T : IComparable<T>
 
         //temp.Right = null;
         temp.Left = null;
-        if (node.Right != null) temp.Left = node.Right;
+        if (node.Right != null) { temp.Left = node.Right; temp.Height = FixHeight(temp); ; }
         node.Right = temp;
+
+        node.Height = FixHeight(node);
 
         return node;
     }
@@ -241,7 +250,7 @@ public class AVL<T> where T : IComparable<T>
     {
         if (!this.Contains(item))
         {
-            throw new ArgumentException();
+            return;
         }
 
         this.root = this.Delete(item, this.root);
@@ -272,7 +281,7 @@ public class AVL<T> where T : IComparable<T>
             var temp = node;
             //node = this.FindMind(temp.Right);
             node = this.FindMind(temp.Right);
-            node.Right = this.DeleteMin(temp.Right);
+            node.Right = Balance(this.DeleteMin(temp.Right));
             node.Left = temp.Left;
         }
 
@@ -287,6 +296,16 @@ public class AVL<T> where T : IComparable<T>
         }
 
         return this.FindMind(node.Left);
+    }
+    public void DeleteMin()
+    {
+        if (this.root == null)
+        {
+            return;
+        }
+
+        this.root = this.DeleteMin(this.root);
+        //throw new NotImplementedException();
     }
 
     private Node<T> DeleteMin(Node<T> node)
