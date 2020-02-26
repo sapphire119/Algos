@@ -107,8 +107,9 @@ public class AVL<T> where T : IComparable<T>
         node = temp.Left;
         node.Height = temp.Height;
         temp.Height = node.Height - 1;
+
         temp.Left = null;
-        temp.Right = null;
+        //temp.Right = null;
 
         node.Right = temp;
 
@@ -121,7 +122,7 @@ public class AVL<T> where T : IComparable<T>
         node = temp.Right;
         node.Height = temp.Height;
         temp.Height = node.Height - 1;
-        temp.Left = null;
+        //temp.Left = null;
         temp.Right = null;
 
         node.Left = temp;
@@ -155,7 +156,7 @@ public class AVL<T> where T : IComparable<T>
         //node.Height = temp.Height;
 
         temp.Right = null;
-        temp.Left = null;
+        //temp.Left = null;
 
         if (node.Left != null) temp.Right = node.Left;
         node.Left = temp;
@@ -170,7 +171,7 @@ public class AVL<T> where T : IComparable<T>
         //node.Height = temp.Right.Height;
         temp.Height = node.Height - 1;
 
-        temp.Right = null;
+        //temp.Right = null;
         temp.Left = null;
         if (node.Right != null) temp.Left = node.Right;
         node.Right = temp;
