@@ -239,12 +239,66 @@ public class AVL<T> where T : IComparable<T>
 
     public void Delete(T item)
     {
+        if (!this.Contains(item))
+        {
+            throw new ArgumentException();
+        }
+
         this.root = this.Delete(item, this.root);
     }
 
     private Node<T> Delete(T item, Node<T> node)
     {
-        return default;
+        var comparison = item.CompareTo(node.Value);
+        if (comparison < 0)
+        {
+            node.Left = this.Delete(item, node.Left);
+        }
+        else if (comparison > 0)
+        {
+            node.Right = this.Delete(item, node.Right);
+        }
+        else
+        {
+            if (node.Left == null)
+            {
+                return node.Right;
+            }
+            else if (node.Right == null)
+            {
+                return node.Left;
+            }
+
+            var temp = node;
+            //node = this.FindMind(temp.Right);
+            node = this.FindMind(temp.Right);
+            node.Right = this.DeleteMin(temp.Right);
+            node.Left = temp.Left;
+        }
+
+        return Balance(node);
+    }
+
+    private Node<T> FindMind(Node<T> node)
+    {
+        if (node.Left == null)
+        {
+            return node;
+        }
+
+        return this.FindMind(node.Left);
+    }
+
+    private Node<T> DeleteMin(Node<T> node)
+    {
+        if (node.Left == null)
+        {
+            return node.Right;
+        }
+
+        node.Left = this.DeleteMin(node.Left);
+
+        return node;
     }
 
     public void EachInOrder(Action<T> action)
