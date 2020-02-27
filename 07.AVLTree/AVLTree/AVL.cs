@@ -115,7 +115,6 @@ public class AVL<T> where T : IComparable<T>
         temp.Height = node.Height - 1;
 
         temp.Left = null;
-        //temp.Right = null;
 
         if (node.Right != null) { temp.Left = node.Right; temp.Height = FixHeight(temp); ; }
         node.Right = temp;
@@ -129,7 +128,7 @@ public class AVL<T> where T : IComparable<T>
         node = temp.Right;
         node.Height = temp.Height;
         temp.Height = node.Height - 1;
-        //temp.Left = null;
+
         temp.Right = null;
 
         if (node.Left != null) { temp.Right = node.Left; temp.Height = FixHeight(temp); }
@@ -142,12 +141,10 @@ public class AVL<T> where T : IComparable<T>
     {
         if (signOfElement < 0)
         {
-            //Left Rotation
             node = this.LeftRotation(node);
         }
         else if (signOfElement > 0)
         {
-            //Right Rotation
             node = this.RightRotation(node);
         }
 
@@ -178,10 +175,8 @@ public class AVL<T> where T : IComparable<T>
     {
         var temp = node;
         node = temp.Left;
-        //node.Height = temp.Right.Height;
         temp.Height = node.Height - 1;
 
-        //temp.Right = null;
         temp.Left = null;
         if (node.Right != null) { temp.Left = node.Right; temp.Height = FixHeight(temp); ; }
         node.Right = temp;
@@ -190,20 +185,6 @@ public class AVL<T> where T : IComparable<T>
 
         return node;
     }
-
-    //private Node<T> DoubleRotation(Node<T> node, int signOfParent)
-    //{
-    //    if (signOfParent < 0)
-    //    {
-    //        node = this.LeftRotation(node);
-    //    }
-    //    else if (signOfParent > 0)
-    //    {
-    //        node = this.RightRotation(node);
-    //    }
-
-    //    return node;
-    //}
 
     private Node<T> GetNodeChild(Node<T> node, int parentSign)
     {
@@ -215,22 +196,8 @@ public class AVL<T> where T : IComparable<T>
         var leftNodeHeight = this.HeightOfNode(node.Left);
         var rightNodeHeight = this.HeightOfNode(node.Right);
 
-        //if (node.Left != null || node.Right != null)
-        //{
-        //    var currentHeight = Math.Max(leftNodeHeight, rightNodeHeight) + 1;
-        //    return currentHeight;
-        //}
-
         var currentHeight = Math.Max(leftNodeHeight, rightNodeHeight) + 1;
         return currentHeight;
-        //return node.Height;
-        //return node.Left != null ? 1 + node.Left.Height :
-        //    node.Right != null ? 1 + node.Right.Height : node.Height;
-    }
-
-    private int BalanceFactor(Node<T> leftNode, Node<T> rightNode)
-    {
-        return HeightOfNode(leftNode) - HeightOfNode(rightNode);
     }
 
     private int HeightOfNode(Node<T> node)
@@ -238,18 +205,10 @@ public class AVL<T> where T : IComparable<T>
         return node != null ? node.Height : 0;
     }
 
-    //private Node<T> Rotate(Node<T> node)
-    //{
-
-    //    return node;
-    //}
-
-    //private Node<T> RotateLeftRight(Node<T> node)
-    //{
-    //    return node;
-    //}
-
-
+    private int BalanceFactor(Node<T> leftNode, Node<T> rightNode)
+    {
+        return HeightOfNode(leftNode) - HeightOfNode(rightNode);
+    }
 
     public void Delete(T item)
     {
@@ -310,7 +269,6 @@ public class AVL<T> where T : IComparable<T>
         }
 
         this.root = this.DeleteMin(this.root);
-        //throw new NotImplementedException();
     }
 
     private Node<T> DeleteMin(Node<T> node)
