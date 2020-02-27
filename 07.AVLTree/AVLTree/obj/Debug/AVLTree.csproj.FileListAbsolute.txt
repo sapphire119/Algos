@@ -1,0 +1,6 @@
+C:\repos\office-data-algos\07.AVLTree\AVLTree\bin\Debug\AVLTree.exe.config
+C:\repos\office-data-algos\07.AVLTree\AVLTree\bin\Debug\AVLTree.exe
+C:\repos\office-data-algos\07.AVLTree\AVLTree\bin\Debug\AVLTree.pdb
+C:\repos\office-data-algos\07.AVLTree\AVLTree\obj\Debug\AVLTree.csprojAssemblyReference.cache
+C:\repos\office-data-algos\07.AVLTree\AVLTree\obj\Debug\AVLTree.exe
+C:\repos\office-data-algos\07.AVLTree\AVLTree\obj\Debug\AVLTree.pdb

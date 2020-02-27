@@ -54,9 +54,10 @@ namespace Hierarchy.Tests.Correctness
             this.Hierarchy.Add(110, 99);
             this.Hierarchy.Add(99, 1);
 
-            var result = this.Hierarchy.GetChildren(110).ToArray();
+            var result = this.Hierarchy.GetChildren(110);
+            var result1 = result.ToArray();
 
-            CollectionAssert.AreEqual(result, new[] { 22,333,15,99}, "Incorrect amount of children returned!");
+            CollectionAssert.AreEqual(result1, new[] { 22,333,15,99}, "Incorrect amount of children returned!");
         }
     }
 }
