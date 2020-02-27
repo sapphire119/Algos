@@ -56,12 +56,13 @@ public class AVL<T> where T : IComparable<T>
         var balanceFactor = this.BalanceFactor(node.Left, node.Right);
         if (Math.Abs(balanceFactor) >= 2)
         {
-            var tempChild = GetNodeChild(node);
+            var signOfParent = Math.Sign(balanceFactor);
+
+            var tempChild = GetNodeChild(node, signOfParent);
             var childBalanceFactor = this.BalanceFactor(tempChild.Left, tempChild.Right);
 
             //sign can be equal to 0
             //consider
-            var signOfParent = Math.Sign(balanceFactor);
             var signOfChild = Math.Sign(childBalanceFactor);
 
             //Do rotations
@@ -116,6 +117,7 @@ public class AVL<T> where T : IComparable<T>
         temp.Left = null;
         //temp.Right = null;
 
+        if (node.Right != null) { temp.Left = node.Right; temp.Height = FixHeight(temp); ; }
         node.Right = temp;
 
         return node;
@@ -130,6 +132,7 @@ public class AVL<T> where T : IComparable<T>
         //temp.Left = null;
         temp.Right = null;
 
+        if (node.Left != null) { temp.Right = node.Left; temp.Height = FixHeight(temp); }
         node.Left = temp;
 
         return node;
@@ -202,9 +205,9 @@ public class AVL<T> where T : IComparable<T>
     //    return node;
     //}
 
-    private Node<T> GetNodeChild(Node<T> node)
+    private Node<T> GetNodeChild(Node<T> node, int parentSign)
     {
-        return node.Left ?? node.Right;
+        return parentSign < 0 ? node.Right : node.Left;
     }
 
     private int FixHeight(Node<T> node)
@@ -212,13 +215,15 @@ public class AVL<T> where T : IComparable<T>
         var leftNodeHeight = this.HeightOfNode(node.Left);
         var rightNodeHeight = this.HeightOfNode(node.Right);
 
-        if (node.Left != null || node.Right != null)
-        {
-            var currentHeight = Math.Max(leftNodeHeight, rightNodeHeight) + 1;
-            return currentHeight;
-        }
+        //if (node.Left != null || node.Right != null)
+        //{
+        //    var currentHeight = Math.Max(leftNodeHeight, rightNodeHeight) + 1;
+        //    return currentHeight;
+        //}
 
-        return node.Height;
+        var currentHeight = Math.Max(leftNodeHeight, rightNodeHeight) + 1;
+        return currentHeight;
+        //return node.Height;
         //return node.Left != null ? 1 + node.Left.Height :
         //    node.Right != null ? 1 + node.Right.Height : node.Height;
     }
