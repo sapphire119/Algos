@@ -1,25 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
-using Wintellect.PowerCollections;
+//using Wintellect.PowerCollections;
 
 public class FirstLastList<T> : IFirstLastList<T> where T : IComparable<T>
 {
+    private List<T> list = new List<T>();
+    private AVL<T> avlTree = new AVL<T>();
+
     public int Count
     {
         get
         {
-            throw new NotImplementedException();
+            return this.list.Count;
+            //throw new NotImplementedException();
         }
     }
 
     public void Add(T element)
     {
+        this.avlTree.Insert(element);
+        
         throw new NotImplementedException();
     }
 
     public void Clear()
     {
-        throw new NotImplementedException();
+        this.avlTree.Clear();
+        this.list.Clear();
+        //throw new NotImplementedException();
     }
 
     public IEnumerable<T> First(int count)
