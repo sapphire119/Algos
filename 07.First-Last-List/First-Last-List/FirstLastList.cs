@@ -12,15 +12,14 @@ public class FirstLastList<T> : IFirstLastList<T> where T : IComparable<T>
         get
         {
             return this.list.Count;
-            //throw new NotImplementedException();
         }
     }
 
     public void Add(T element)
     {
         this.avlTree.Insert(element);
-        
-        throw new NotImplementedException();
+        this.list.Add(element);
+        //throw new NotImplementedException();
     }
 
     public void Clear()
@@ -32,21 +31,79 @@ public class FirstLastList<T> : IFirstLastList<T> where T : IComparable<T>
 
     public IEnumerable<T> First(int count)
     {
-        throw new NotImplementedException();
+        if (count > this.Count)
+        {
+            throw new ArgumentOutOfRangeException();
+        }
+
+        //can be done with LINQ but f it
+        var arr = new T[count];
+        for (int i = 0; i < count; i++)
+        {
+            arr[i] = this.list[i];
+        }
+
+        return arr;
     }
 
     public IEnumerable<T> Last(int count)
     {
-        throw new NotImplementedException();
-    }
+        if (count > this.Count)
+        {
+            throw new ArgumentOutOfRangeException();
+        }
 
-    public IEnumerable<T> Max(int count)
-    {
-        throw new NotImplementedException();
+        var arr = new T[count];
+        for (int i = this.list.Count - 1; i >= this.list.Count - count; i--)
+        {
+            arr[i] = this.list[i];
+        }
+
+        return arr;
     }
 
     public IEnumerable<T> Min(int count)
     {
+        if (count > this.Count)
+        {
+            throw new ArgumentOutOfRangeException();
+        }
+
+        var temp = this.Min(count, this.avlTree.Root);
+        //throw new NotImplementedException();
+
+        return temp;
+    }
+
+    private IEnumerable<T> Min(int count, Node<T> node, int tempCount = 0)
+    {
+        if (node == null)
+        {
+            return null;
+        }
+
+        if (tempCount > count)
+        {
+            return default;
+        }
+
+
+        this.Min(count, node.Left, tempCount);
+        tempCount++;
+        this.Min(count, node.Right, tempCount);
+
+
+
+        return default;
+    }
+
+    public IEnumerable<T> Max(int count)
+    {
+        if (count > this.Count)
+        {
+            throw new ArgumentOutOfRangeException();
+        }
+
         throw new NotImplementedException();
     }
 

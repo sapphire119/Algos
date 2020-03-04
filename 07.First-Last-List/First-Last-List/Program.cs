@@ -9,11 +9,14 @@ public class Program
 {
     public static void Main()
     {
-        //FirstLastList<int> list = new FirstLastList<int>();
-        //list.Add(1);
-        //list.Add(2);
-        //list.Add(3);
-        //list.Add(4);
+        FirstLastList<int> list = new FirstLastList<int>();
+        list.Add(1);
+        list.Add(2);
+        list.Add(3);
+        list.Add(4);
+
+
+        list.Min(2);
         //Console.WriteLine();
 
         var avlTree = new AVL<int>();
@@ -24,6 +27,7 @@ public class Program
         avlTree.Insert(10);
         var currentNode = avlTree.Search(10);
         test.Add(currentNode);
+
 
         var productTree = new AVL<Product>();
         productTree.Insert(new Product(1.11m, "first"));
@@ -54,6 +58,7 @@ public class Program
         var deletionNode = listA.Find(e => e == node);
         deletionNode.Value = 5;
         node.Value = 7;
+
         
     }
 
