@@ -69,28 +69,47 @@ public class FirstLastList<T> : IFirstLastList<T> where T : IComparable<T>
             throw new ArgumentOutOfRangeException();
         }
 
-        var temp = this.Min(count, this.avlTree.Root);
-        //throw new NotImplementedException();
+        var tempList = new List<T>();
+        var tempCounter = 0;
+        this.EachInOrder(this.avlTree.Root, tempList.Add, ref tempCounter, count);
 
-        return temp;
+        return tempList;
     }
 
-    private IEnumerable<T> Min(int count, Node<T> node, int tempCount = 0)
+    private void EachInOrder(Node<T> node, Action<T> action, ref int count, int limit)
+    {
+        if (node == null)
+        {
+            return;
+        }
+
+        if (count >= limit)
+        {
+            return;
+        }
+
+        this.EachInOrder(node.Left, action, ref count, limit);
+        count++;
+        action(node.Value);
+        this.EachInOrder(node.Right, action, ref count, limit);
+    }
+
+    private IEnumerable<T> Min(int count, Node<T> node)
     {
         if (node == null)
         {
             return null;
         }
 
-        if (tempCount > count)
-        {
-            return default;
-        }
+        //if (tempCount > count)
+        //{
+        //    return default;
+        //}
 
 
-        this.Min(count, node.Left, tempCount);
-        tempCount++;
-        this.Min(count, node.Right, tempCount);
+        this.Min(count, node.Left);
+        //tempCount++;
+        this.Min(count, node.Right);
 
 
 

@@ -291,6 +291,7 @@ public class AVL<T> where T : IComparable<T>
         this.root = this.Delete(item, this.root);
     }
 
+
     private Node<T> Delete(T item, Node<T> node)
     {
         var comparison = item.CompareTo(node.Value);
@@ -315,7 +316,7 @@ public class AVL<T> where T : IComparable<T>
 
             var temp = node;
             //node = this.FindMind(temp.Right);
-            node = this.FindMind(temp.Right);
+            node = this.FindMin(temp.Right);
             node.Right = Balance(this.DeleteMin(temp.Right));
             node.Left = temp.Left;
         }
@@ -323,14 +324,19 @@ public class AVL<T> where T : IComparable<T>
         return Balance(node);
     }
 
-    private Node<T> FindMind(Node<T> node)
+    public Node<T> FindMind()
+    {
+        return this.FindMin(this.root);
+    }
+
+    private Node<T> FindMin(Node<T> node)
     {
         if (node.Left == null)
         {
             return node;
         }
 
-        return this.FindMind(node.Left);
+        return this.FindMin(node.Left);
     }
     public void DeleteMin()
     {
