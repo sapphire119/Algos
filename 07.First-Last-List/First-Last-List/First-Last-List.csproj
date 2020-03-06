@@ -46,9 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AVLTree.cs" />
     <Compile Include="FirstLastListFactory.cs" />
     <Compile Include="IFirstLastList.cs" />
     <Compile Include="FirstLastList.cs" />
+    <Compile Include="DoubleLinkedList1.cs" />
+    <Compile Include="Product.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Node.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

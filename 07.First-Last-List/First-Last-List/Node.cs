@@ -8,6 +8,8 @@ public class Node<T> where T : IComparable<T>
     public Node<T> Right;
     public int Height;
     public List<Node<T>> Duplicates { get; }
+    public Node<T> Head { get; set; }
+    public Node<T> Tail { get; set; }
 
     public Node(T value)
     {
