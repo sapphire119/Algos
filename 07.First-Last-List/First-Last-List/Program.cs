@@ -27,13 +27,13 @@ public class Program
         //var currentNode = avlTree.Search(10);
         //test.Add(currentNode);
 
-        var testing = new DoubleLinkedList<int>();
+        //var testing = new DoubleLinkedList<int>();
 
-        testing.Insert(10);
-        testing.Insert(20);
-        testing.Insert(30);
-        testing.Insert(50);
-        testing.Insert(100);
+        //testing.Insert(10);
+        //testing.Insert(20);
+        //testing.Insert(30);
+        //testing.Insert(50);
+        //testing.Insert(100);
 
 
         var secondList = new FirstLastList<Product>();
@@ -48,7 +48,7 @@ public class Program
         secondList.Min(5);
         secondList.Max(5);
 
-        var count = secondList.RemoveAll(new Product(200m, null));
+        var count = secondList.RemoveAll(new Product(1.20m, null));
         //var productTree = new AVL<Product>();
         //productTree.Insert(new Product(1.11m, "first"));
         //productTree.Insert(new Product(0.50m, "coffee"));

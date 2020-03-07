@@ -335,6 +335,10 @@
             {
                 return Search(node.Right, item);
             }
+            //else if (cmp == 0 && node.Duplicates.Count > 0)
+            //{
+            //    return node.Duplicates[node.Duplicates.Count - 1];
+            //}
 
             return node;
         }

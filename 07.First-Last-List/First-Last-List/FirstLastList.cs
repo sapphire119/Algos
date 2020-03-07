@@ -20,7 +20,12 @@ public class FirstLastList<T> : IFirstLastList<T> where T : IComparable<T>
     public void Add(T element)
     {
         this.avlTree.Insert(element);
-        this.list.Insert(element);
+        var nodeCreated = this.avlTree.Search(element);
+        if (nodeCreated.Duplicates.Count > 0)
+        {
+            nodeCreated = nodeCreated.Duplicates[nodeCreated.Duplicates.Count - 1];
+        }
+        this.list.Insert(nodeCreated);
     }
 
     public void Clear()
@@ -57,9 +62,11 @@ public class FirstLastList<T> : IFirstLastList<T> where T : IComparable<T>
         }
 
         var arr = new T[count];
+        var currentHead = this.list.Head;
         for (int i = this.list.Count - 1, j = 0; i >= this.list.Count - count; i--, j++)
         {
-            arr[j] = this.list[i];
+            arr[j] = currentHead.Value;
+            currentHead = currentHead.Tail;
         }
 
         return arr;
@@ -150,7 +157,8 @@ public class FirstLastList<T> : IFirstLastList<T> where T : IComparable<T>
             return default;
         }
         this.avlTree.Delete(element);
-        var count = this.list.RemoveAll(e => e.CompareTo(nodeElement.Value) == 0);
+        var count = this.list.Delete(nodeElement);
+        //var count = this.list.RemoveAll(e => e.CompareTo(nodeElement.Value) == 0);
         return count;
     }
 }

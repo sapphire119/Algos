@@ -25,9 +25,8 @@
             }
         }
 
-        public void Insert(T element)
+        public void Insert(Node<T> node)
         {
-            var node = new Node<T>(element);
             if (this.head == null && this.tail == null)
             {
                 this.head = node;
@@ -43,10 +42,39 @@
             this.count++;
         }
 
+        public int Delete(Node<T> node)
+        {
+            for (int i = 0; i < node.Duplicates.Count; i++)
+            {
+                var currentNode = node.Duplicates[i];
+                this.DeleteNode(currentNode);
+            }
+            this.DeleteNode(node);
+
+            var deletedNodesCount = node.Duplicates.Count + 1;
+            this.count -= deletedNodesCount;
+
+            return deletedNodesCount;
+        }
+
+        private void DeleteNode(Node<T> node)
+        {
+            var currentNodeHead = node.Head;
+            var currentNodeTail = node.Tail;
+
+            //var temp = node;
+            if (currentNodeHead != null) currentNodeHead.Tail = node.Tail;
+            else this.head = this.head.Tail;
+
+            if (currentNodeTail != null) currentNodeTail.Head = node.Head;
+            else this.tail = this.tail.Head;
+        }
+
         public void Clear()
         {
             this.head = null;
             this.tail = null;
+            this.count = 0;
         }
     }
 }
