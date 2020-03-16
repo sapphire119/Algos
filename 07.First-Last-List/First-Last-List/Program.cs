@@ -13,10 +13,10 @@ public class Program
         //FirstLastList<int> list = new FirstLastList<int>();
         //list.Add(1);
         //list.Add(2);
+        //list.Min(2);
         //list.Add(3);
         //list.Add(4);
 
-        //list.Min(2);
         ////Console.WriteLine();
 
         //var avlTree = new AVL<int>();
