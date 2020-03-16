@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public class Trie<Value>
+public class Trie<T>
 {
     private Node root;
 
     private class Node
     {
-        public Value val;
+        public T val;
         public bool isTerminal;
         public Dictionary<char, Node> next = new Dictionary<char, Node>();
     }
 
-    public Value GetValue(string key)
+    public T GetValue(string key)
     {
-        var x = GetNode(root, key, 0);
+        var x = this.GetNode(this.root, key, 0);
         if (x == null || !x.isTerminal)
         {
             throw new InvalidOperationException();
@@ -25,13 +25,8 @@ public class Trie<Value>
 
     public bool Contains(string key)
     {
-        var node = GetNode(this.root, key, 0);
+        var node = this.GetNode(this.root, key, 0);
         return node != null && node.isTerminal;
-    }
-
-    public void Insert(string key, Value val)
-    {
-        root = Insert(root, key, val, 0);
     }
 
     public IEnumerable<string> GetByPrefix(string prefix)
@@ -67,7 +62,12 @@ public class Trie<Value>
         return GetNode(node, key, d + 1);
     }
 
-    private Node Insert(Node x, string key, Value val, int d)
+    public void Insert(string key, T val)
+    {
+        this.root = this.Insert(root, key, val, 0);
+    }
+
+    private Node Insert(Node node, string key, T value, int startIndex)
     {
        //ToDo: Create insert
        throw new NotImplementedException();
