@@ -39,27 +39,27 @@ public class Trie<T>
         return results;
     }
 
-    private Node GetNode(Node x, string key, int d)
+    private Node GetNode(Node currentNode, string key, int index)
     {
-        if (x == null)
+        if (currentNode == null)
         {
             return null;
         }
 
-        if (d == key.Length)
+        if (index == key.Length)
         {
-            return x;
+            return currentNode;
         }
 
         Node node = null;
-        char c = key[d];
+        char currentChar = key[index];
 
-        if (x.next.ContainsKey(c))
+        if (currentNode.next.ContainsKey(currentChar))
         {
-            node = x.next[c];
+            node = currentNode.next[currentChar];
         }
 
-        return GetNode(node, key, d + 1);
+        return GetNode(node, key, index + 1);
     }
 
     public void Insert(string key, T val)
@@ -67,27 +67,47 @@ public class Trie<T>
         this.root = this.Insert(root, key, val, 0);
     }
 
-    private Node Insert(Node node, string key, T value, int startIndex)
+    private Node Insert(Node currentNode, string key, T value, int startIndex)
     {
-       //ToDo: Create insert
-       throw new NotImplementedException();
+        if (currentNode == null)
+        {
+            currentNode = new Node();
+        }
+
+        if (key.Length == startIndex)
+        {
+            currentNode.isTerminal = true;
+            currentNode.val = value;
+            return currentNode;
+        }
+
+        Node node = null;
+        char currentChar = key[startIndex];
+        if (currentNode.next.ContainsKey(currentChar))
+        {
+            node = currentNode.next[currentChar];
+        }
+
+        currentNode.next[currentChar] = this.Insert(node, key, value, startIndex + 1);
+
+        return currentNode;
     }
 
-    private void Collect(Node x, string prefix, Queue<string> results)
+    private void Collect(Node currentNode, string prefix, Queue<string> results)
     {
-        if (x == null)
+        if (currentNode == null)
         {
             return;
         }
 
-        if (x.val != null && x.isTerminal)
+        if (currentNode.val != null && currentNode.isTerminal)
         {
             results.Enqueue(prefix);
         }
 
-        foreach (var c in x.next.Keys)
+        foreach (var key in currentNode.next.Keys)
         {
-            Collect(x.next[c], prefix + c, results);
+            Collect(currentNode.next[key], prefix + key, results);
         }
     }
 }
