@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "0",
+    "Name": "Initial Wintellect Codebase",
+    "DevelopmentStatus": "None",
+    "Description": "This release consists of the source and binaries that were previously available from [url:http://www.wintellect.com]. It is the baseline for future development.",
+    "ReleasedDatge": "0001-01-01T00:00:00",
+    "ModifiedDate": "2007-09-08T20:20:23.697-07:00",
+    "Files": [
+      {
+        "Id": "2742e0be-bb53-447e-bd90-41961667f919",
+        "FileName": "PowerCollections.zip",
+        "Url": "./0/2742e0be-bb53-447e-bd90-41961667f919",
+        "Type": "Source Code",
+        "UploadDate": "2007-09-08T20:20:23.727-07:00"
+      },
+      {
+        "Id": "62d46d08-14bd-471a-9e3d-411f1466fa0b",
+        "FileName": "PowerCollections.chm",
+        "Url": "./0/62d46d08-14bd-471a-9e3d-411f1466fa0b",
+        "Type": "Documentation",
+        "UploadDate": "2007-09-08T20:17:29.73-07:00"
+      }
+    ]
+  }
+]

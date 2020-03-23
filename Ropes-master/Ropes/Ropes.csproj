@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>Library of the Ropes datastructure, a highly specialized structure for manipulating very long strings.</Description>
+    <Authors>Trent Hyer</Authors>
+  </PropertyGroup>
+
+</Project>
