@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HashTable\HashTable.csproj" />
+    <ProjectReference Include="..\Trees\Trees.csproj" />
   </ItemGroup>
 
 </Project>
