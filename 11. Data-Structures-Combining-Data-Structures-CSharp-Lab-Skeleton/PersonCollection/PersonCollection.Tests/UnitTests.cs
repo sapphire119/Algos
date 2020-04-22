@@ -96,9 +96,9 @@ public class UnitTestsPersonCollection
         persons.AddPerson("ani@gmail.com", "Anna", 19, "Bourgas");
 
         // Act
-        var personsGmail = persons.FindPersons("gmail.com");
-        var personsYahoo = persons.FindPersons("yahoo.co.uk");
-        var personsHoo = persons.FindPersons("hoo.co.uk");
+        var personsGmail = persons.FindPeople("gmail.com");
+        var personsYahoo = persons.FindPeople("yahoo.co.uk");
+        var personsHoo = persons.FindPeople("hoo.co.uk");
 
         // Assert
         CollectionAssert.AreEqual(
@@ -124,10 +124,10 @@ public class UnitTestsPersonCollection
         persons.AddPerson("pepi2@yahoo.fr", "Pesho", 21, "Plovdiv");
 
         // Act
-        var personsPeshoPlovdiv = persons.FindPersons("Pesho", "Plovdiv");
-        var personsLowercase = persons.FindPersons("pesho", "plovdiv");
-        var personsPeshoNoTown = persons.FindPersons("Pesho", null);
-        var personsAnnaBourgas = persons.FindPersons("Anna", "Bourgas");
+        var personsPeshoPlovdiv = persons.FindPeople("Pesho", "Plovdiv");
+        var personsLowercase = persons.FindPeople("pesho", "plovdiv");
+        var personsPeshoNoTown = persons.FindPeople("Pesho", null);
+        var personsAnnaBourgas = persons.FindPeople("Anna", "Bourgas");
 
         // Assert
         CollectionAssert.AreEqual(
@@ -157,11 +157,11 @@ public class UnitTestsPersonCollection
         persons.AddPerson("asen@gmail.com", "Asen", 21, "Rousse");
 
         // Act
-        var personsAgedFrom21to22 = persons.FindPersons(21, 22);
-        var personsAgedFrom10to11 = persons.FindPersons(10, 11);
-        var personsAged21 = persons.FindPersons(21, 21);
-        var personsAged19 = persons.FindPersons(19, 19);
-        var personsAgedFrom0to1000 = persons.FindPersons(0, 1000);
+        var personsAgedFrom21to22 = persons.FindPeople(21, 22);
+        var personsAgedFrom10to11 = persons.FindPeople(10, 11);
+        var personsAged21 = persons.FindPeople(21, 21);
+        var personsAged19 = persons.FindPeople(19, 19);
+        var personsAgedFrom0to1000 = persons.FindPeople(0, 1000);
 
         // Assert
         CollectionAssert.AreEqual(
@@ -253,13 +253,13 @@ public class UnitTestsPersonCollection
         // Act
         var personPeshoGmail = persons.FindPerson("pesho@gmail.com");
 
-        var personsGmail = persons.FindPersons("gmail.com");
-        var personsYahoo = persons.FindPersons("yahoo.co.uk");
+        var personsGmail = persons.FindPeople("gmail.com");
+        var personsYahoo = persons.FindPeople("yahoo.co.uk");
 
-        var personsPeshoPlovdiv = persons.FindPersons("Pesho", "Plovdiv");
+        var personsPeshoPlovdiv = persons.FindPeople("Pesho", "Plovdiv");
 
-        var personsAgedFrom21to22 = persons.FindPersons(21, 22);
-        var personsAgedFrom0to1000 = persons.FindPersons(0, 1000);
+        var personsAgedFrom21to22 = persons.FindPeople(21, 22);
+        var personsAgedFrom0to1000 = persons.FindPeople(0, 1000);
 
         var personsAgedFrom21to22Plovdiv = persons.FindPersons(21, 22, "Plovdiv");
         var personsAged19Bourgas = persons.FindPersons(19, 19, "Bourgas");
@@ -308,23 +308,23 @@ public class UnitTestsPersonCollection
         Assert.AreEqual(28, person.Age);
         Assert.AreEqual("Plovdiv", person.Town);
 
-        var personsGmail = persons.FindPersons("gmail.com");
+        var personsGmail = persons.FindPeople("gmail.com");
         CollectionAssert.AreEqual(
             new string[] { "asen@gmail.com", "pesho@gmail.com" },
             personsGmail.Select(p => p.Email).ToList());
 
-        var personsPeshoPlovdiv = persons.FindPersons("Pesho", "Plovdiv");
+        var personsPeshoPlovdiv = persons.FindPeople("Pesho", "Plovdiv");
         CollectionAssert.AreEqual(
             new string[] { "pesho@gmail.com" },
             personsPeshoPlovdiv.Select(p => p.Email).ToList());
 
-        var personsPeshoSofia = persons.FindPersons("Pesho", "Sofia");
+        var personsPeshoSofia = persons.FindPeople("Pesho", "Sofia");
         Assert.AreEqual(0, personsPeshoSofia.Count());
 
-        var personsKiroPlovdiv = persons.FindPersons("Kiro", "Plovdiv");
+        var personsKiroPlovdiv = persons.FindPeople("Kiro", "Plovdiv");
         Assert.AreEqual(0, personsKiroPlovdiv.Count());
 
-        var personsAge22To28 = persons.FindPersons(22, 28);
+        var personsAge22To28 = persons.FindPeople(22, 28);
         CollectionAssert.AreEqual(
             new string[] { "asen@gmail.com", "kiro@yahoo.co.uk", "pesho@gmail.com" },
             personsAge22To28.Select(p => p.Email).ToList());
@@ -343,23 +343,23 @@ public class UnitTestsPersonCollection
         person = persons.FindPerson("pesho@gmail.com");
         Assert.IsNull(person);
 
-        personsGmail = persons.FindPersons("gmail.com");
+        personsGmail = persons.FindPeople("gmail.com");
         CollectionAssert.AreEqual(
             new string[] { "asen@gmail.com" },
             personsGmail.Select(p => p.Email).ToList());
 
-        personsPeshoPlovdiv = persons.FindPersons("Pesho", "Plovdiv");
+        personsPeshoPlovdiv = persons.FindPeople("Pesho", "Plovdiv");
         CollectionAssert.AreEqual(
             new string[] { },
             personsPeshoPlovdiv.Select(p => p.Email).ToList());
 
-        personsPeshoSofia = persons.FindPersons("Pesho", "Sofia");
+        personsPeshoSofia = persons.FindPeople("Pesho", "Sofia");
         Assert.AreEqual(0, personsPeshoSofia.Count());
 
-        personsKiroPlovdiv = persons.FindPersons("Kiro", "Plovdiv");
+        personsKiroPlovdiv = persons.FindPeople("Kiro", "Plovdiv");
         Assert.AreEqual(0, personsKiroPlovdiv.Count());
 
-        personsAge22To28 = persons.FindPersons(22, 28);
+        personsAge22To28 = persons.FindPeople(22, 28);
         CollectionAssert.AreEqual(
             new string[] { "asen@gmail.com", "kiro@yahoo.co.uk" },
             personsAge22To28.Select(p => p.Email).ToList());

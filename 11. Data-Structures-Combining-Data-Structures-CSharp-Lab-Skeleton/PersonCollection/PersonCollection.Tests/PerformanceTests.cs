@@ -58,10 +58,10 @@ public class PerformanceTestsPersonCollection
         for (int i = 0; i < 10000; i++)
         {
             var existingPersons =
-                persons.FindPersons("gmail1.com").ToList();
+                persons.FindPeople("gmail1.com").ToList();
             Assert.AreEqual(50, existingPersons.Count);
             var notExistingPersons =
-                persons.FindPersons("non-existing email").ToList();
+                persons.FindPeople("non-existing email").ToList();
             Assert.AreEqual(0, notExistingPersons.Count);
         }
     }
@@ -78,10 +78,10 @@ public class PerformanceTestsPersonCollection
         for (int i = 0; i < 10000; i++)
         {
             var existingPersons =
-                persons.FindPersons("Pesho1", "Sofia1").ToList();
+                persons.FindPeople("Pesho1", "Sofia1").ToList();
             Assert.AreEqual(50, existingPersons.Count);
             var notExistingPersons =
-                persons.FindPersons("Pesho1", "Sofia5").ToList();
+                persons.FindPeople("Pesho1", "Sofia5").ToList();
             Assert.AreEqual(0, notExistingPersons.Count);
         }
     }
@@ -98,10 +98,10 @@ public class PerformanceTestsPersonCollection
         for (int i = 0; i < 2000; i++)
         {
             var existingPersons =
-                persons.FindPersons(20, 21).ToList();
+                persons.FindPeople(20, 21).ToList();
             Assert.AreEqual(100, existingPersons.Count);
             var notExistingPersons =
-                persons.FindPersons(500, 600).ToList();
+                persons.FindPeople(500, 600).ToList();
             Assert.AreEqual(0, notExistingPersons.Count);
         }
     }

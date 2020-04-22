@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
-class PlayWithPersons
+public class PlayWithPersons
 {
-    static void Main()
+    public static void Main()
     {
         var persons = new PersonCollection();
         persons.AddPerson("pesho@gmail.com", "Pesho", 28, "Plovdiv");
@@ -25,23 +26,23 @@ class PlayWithPersons
         Console.WriteLine("Find non-existing person: " +
             (nonExistingPerson == null ? "null" : "not null"));
 
-        var personsGmail = persons.FindPersons("gmail.com");
+        var personsGmail = persons.FindPeople("gmail.com");
         Console.WriteLine("Persons @ GMail: [{0}]",
             string.Join(", ", personsGmail.Select(p => p.Email)));
 
-        var personsPeshoPlovdiv = persons.FindPersons("Pesho", "Plovdiv");
+        var personsPeshoPlovdiv = persons.FindPeople("Pesho", "Plovdiv");
         Console.WriteLine("Persons 'Pesho' from 'Plovdiv': [{0}]",
             string.Join(", ", personsPeshoPlovdiv.Select(p => p.Email)));
 
-        var personsPeshoSofia = persons.FindPersons("Pesho", "Sofia");
+        var personsPeshoSofia = persons.FindPeople("Pesho", "Sofia");
         Console.WriteLine("Persons 'Pesho' from 'Sofia': [{0}]",
             string.Join(", ", personsPeshoSofia.Select(p => p.Email)));
 
-        var personsKiroPlovdiv = persons.FindPersons("Kiro", "Plovdiv");
+        var personsKiroPlovdiv = persons.FindPeople("Kiro", "Plovdiv");
         Console.WriteLine("Persons 'Kiro' from 'Plovdiv': [{0}]",
             string.Join(", ", personsKiroPlovdiv.Select(p => p.Email)));
 
-        var personsAge22To28 = persons.FindPersons(22, 28);
+        var personsAge22To28 = persons.FindPeople(22, 28);
         Console.WriteLine("Persons of age 22 ... 28: [{0}]",
             string.Join(", ", personsAge22To28.Select(p => p.Email)));
 
@@ -60,23 +61,23 @@ class PlayWithPersons
         Console.WriteLine("Find non-existing person: " +
             (nonExistingPerson == null ? "null" : "not null"));
 
-        personsGmail = persons.FindPersons("gmail.com");
+        personsGmail = persons.FindPeople("gmail.com");
         Console.WriteLine("Persons @ GMail: [{0}]",
             string.Join(", ", personsGmail.Select(p => p.Email)));
 
-        personsPeshoPlovdiv = persons.FindPersons("Pesho", "Plovdiv");
+        personsPeshoPlovdiv = persons.FindPeople("Pesho", "Plovdiv");
         Console.WriteLine("Persons 'Pesho' from 'Plovdiv': [{0}]",
             string.Join(", ", personsPeshoPlovdiv.Select(p => p.Email)));
 
-        personsPeshoSofia = persons.FindPersons("Pesho", "Sofia");
+        personsPeshoSofia = persons.FindPeople("Pesho", "Sofia");
         Console.WriteLine("Persons 'Pesho' from 'Sofia': [{0}]",
             string.Join(", ", personsPeshoSofia.Select(p => p.Email)));
 
-        personsKiroPlovdiv = persons.FindPersons("Kiro", "Plovdiv");
+        personsKiroPlovdiv = persons.FindPeople("Kiro", "Plovdiv");
         Console.WriteLine("Persons 'Kiro' from 'Plovdiv': [{0}]",
             string.Join(", ", personsKiroPlovdiv.Select(p => p.Email)));
 
-        personsAge22To28 = persons.FindPersons(22, 28);
+        personsAge22To28 = persons.FindPeople(22, 28);
         Console.WriteLine("Persons of age 22 ... 28: [{0}]",
             string.Join(", ", personsAge22To28.Select(p => p.Email)));
 

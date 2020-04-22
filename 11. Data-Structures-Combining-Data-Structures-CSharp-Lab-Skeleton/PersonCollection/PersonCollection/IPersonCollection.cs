@@ -6,8 +6,8 @@ public interface IPersonCollection
     int Count { get; }
     Person FindPerson(string email);
     bool DeletePerson(string email);
-    IEnumerable<Person> FindPersons(string emailDomain);
-    IEnumerable<Person> FindPersons(string name, string town);
-    IEnumerable<Person> FindPersons(int startAge, int endAge);
+    IEnumerable<Person> FindPeople(string emailDomain);
+    IEnumerable<Person> FindPeople(string name, string town);
+    IEnumerable<Person> FindPeople(int startAge, int endAge);
     IEnumerable<Person> FindPersons(int startAge, int endAge, string town);
 }
