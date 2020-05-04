@@ -10,9 +10,12 @@ namespace p02.Queens
         {
             this.RowIndex = rowIndex;
             this.ColumnIndex = columnIndex;
+            this.IsVisited = false;
         }
 
         public int RowIndex { get; set; }
         public int ColumnIndex { get; set; }
+
+        public bool IsVisited { get; set; }
     }
 }

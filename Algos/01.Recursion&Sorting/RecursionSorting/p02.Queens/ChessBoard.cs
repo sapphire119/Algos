@@ -27,6 +27,7 @@ namespace p02.Queens
         private List<QueenRowColIndex> avaiblePoistions;
         //private List<QueenRowColIndex> takenQueensPosition;
         private Dictionary<int, List<QueenRowColIndex>> queensTakenPositions;
+        private List<QueenRowColIndex> queensInitial;
         private int currentQueenIndex;
 
         public ChessBoard(char queenChar)
@@ -34,31 +35,33 @@ namespace p02.Queens
             this.Board = InitialBoard;
             this.QueenChar = queenChar;
             this.NumberOfQueens = 0;
-            this.currentQueenIndex = -1;
-            this.avaiblePoistions = new List<QueenRowColIndex>();
-            this.queensTakenPositions = new Dictionary<int, List<QueenRowColIndex>>();
-            InitializeAvaiblePositions(this.avaiblePoistions);
-            InitializeQueenPositions(this.queensTakenPositions);
+            //this.currentQueenIndex = -1;
+            //this.avaiblePoistions = new List<QueenRowColIndex>();
+            //this.queensTakenPositions = new Dictionary<int, List<QueenRowColIndex>>();
+            //this.queensInitial = new List<QueenRowColIndex>();
+
+            //InitializeAvaiblePositions(this.avaiblePoistions);
+            //InitializeQueenPositions(this.queensTakenPositions);
         }
 
-        private void InitializeAvaiblePositions(List<QueenRowColIndex> avaiblePositions)
-        {
-            for (int i = 0; i < this.Board.GetLength(0); i++)
-            {
-                for (int j = 0; j < this.Board.GetLength(1); j++)
-                {
-                    avaiblePoistions.Add(new QueenRowColIndex(i, j));
-                }
-            }
-        }
+        //private void InitializeAvaiblePositions(List<QueenRowColIndex> avaiblePositions)
+        //{
+        //    for (int i = 0; i < this.Board.GetLength(0); i++)
+        //    {
+        //        for (int j = 0; j < this.Board.GetLength(1); j++)
+        //        {
+        //            avaiblePoistions.Add(new QueenRowColIndex(i, j));
+        //        }
+        //    }
+        //}
 
-        private void InitializeQueenPositions(Dictionary<int, List<QueenRowColIndex>> queensTakenPositions)
-        {
-            for (int i = 0; i < 8; i++)
-            {
-                queensTakenPositions[i] = new List<QueenRowColIndex>();
-            }
-        }
+        //private void InitializeQueenPositions(Dictionary<int, List<QueenRowColIndex>> queensTakenPositions)
+        //{
+        //    for (int i = 0; i < 8; i++)
+        //    {
+        //        queensTakenPositions[i] = new List<QueenRowColIndex>();
+        //    }
+        //}
 
         public char[,] Board { get; set; }
 
@@ -68,27 +71,32 @@ namespace p02.Queens
 
         public bool CanPutQueen(out int rowIndex, out int columnIndex)
         {
-            if (this.avaiblePoistions.Count == 0)
-            {
-                rowIndex = 0;
-                columnIndex = 0;
-                return false;
-            }
+            rowIndex = default;
+            columnIndex = default;
+            return default;
+            //if (this.avaiblePoistions.Count == 0)
+            //{
+            //    rowIndex = 0;
+            //    columnIndex = 0;
+            //    return false;
+            //}
 
-            var firstKvp = this.avaiblePoistions[0];
-            rowIndex = firstKvp.RowIndex;
-            columnIndex = firstKvp.ColumnIndex;
-            return true;
+            //var firstKvp = this.avaiblePoistions[0];
+            //rowIndex = firstKvp.RowIndex;
+            //columnIndex = firstKvp.ColumnIndex;
+            //return true;
         }
 
         public void PutQueen(int rowIndex, int columnIndex)
         {
-            this.currentQueenIndex++; // index for queenTakenPositions
-            this.NumberOfQueens++; // Count of Queens
+            //this.currentQueenIndex++; // index for queenTakenPositions
+            //this.NumberOfQueens++; // Count of Queens
 
-            this.Board[rowIndex, columnIndex] = this.QueenChar;
+            //this.Board[rowIndex, columnIndex] = this.QueenChar;
 
-            AddAllTakenSlots(this.avaiblePoistions, this.queensTakenPositions, rowIndex, columnIndex);
+            //AddAllTakenSlots(this.avaiblePoistions, this.queensTakenPositions, rowIndex, columnIndex);
+            //var position = this.queensTakenPositions[this.currentQueenIndex].FirstOrDefault(x => x.RowIndex == rowIndex && x.ColumnIndex == columnIndex);
+            //this.queensInitial.Add(position);
         }
 
         private void AddAllTakenSlots(List<QueenRowColIndex> avaiblePoistions, 
@@ -96,31 +104,73 @@ namespace p02.Queens
             int rowIndex,
             int columnIndex)
         {
-            var currentQueenSlotList = queensTakenPositions[this.currentQueenIndex];
             //All Horizontal
-            var allHorizontals = this.avaiblePoistions.Where(x => x.RowIndex == rowIndex);
+            var allHorizontals = avaiblePoistions.Where(x => x.RowIndex == rowIndex);
             //All Vertical
-            var allVertical = this.avaiblePoistions.Where(x => x.ColumnIndex == columnIndex);
+            var allVertical = avaiblePoistions.Where(x => x.ColumnIndex == columnIndex);
             //All Diagonal
-            var allRightDiagonal = this.avaiblePoistions.Where(x => x.RowIndex - rowIndex == x.ColumnIndex - columnIndex);
-            //All Around
-            ;
-            //currentQueenSlotList.AddRange();
+            var comparisonRightDiagonal = rowIndex.CompareTo(columnIndex);
+            IEnumerable<QueenRowColIndex> rightDiagonal;
+            if (comparisonRightDiagonal < 0)
+            {
+                //2, 3
+                var difference = columnIndex - rowIndex;
+                rightDiagonal = avaiblePoistions.Where(x => x.RowIndex + difference == x.ColumnIndex);
+            }
+            else if (comparisonRightDiagonal > 0)
+            {
+                //3, 2
+                var difference = rowIndex - columnIndex;
+                rightDiagonal = avaiblePoistions.Where(x => x.RowIndex == x.ColumnIndex + difference);
+            }
+            else
+            {
+                rightDiagonal = avaiblePoistions.Where(x => x.RowIndex == x.ColumnIndex);
+            }
+
+            IEnumerable<QueenRowColIndex> leftDiagonal;
+            var sumOfRows = rowIndex + columnIndex;
+            leftDiagonal = avaiblePoistions.Where(x => x.RowIndex + x.ColumnIndex == sumOfRows);
+
+
+            //var temp = new List<QueenRowColIndex>();
+            //temp.AddRange(allHorizontals);
+            //temp.AddRange(allVertical);
+            //temp.AddRange(leftDiagonal);
+            //temp.AddRange(rightDiagonal);
+            //queensTakenPositions[this.currentQueenIndex] = temp.Distinct().ToList();
+            
+            //foreach (var currentSlot in temp)
+            //{
+            //    avaiblePoistions.Remove(currentSlot);
+            //}
+
         }
 
         public void RemoveQueen()
         {
             //firstKvp is where Queen is Put
-            var lastKvp = this.queensTakenPositions[this.currentQueenIndex][0];
-            var rowIndex = lastKvp.RowIndex;
-            var columnIndex = lastKvp.ColumnIndex;
+            //var lastKvp = this.queensInitial[this.queensInitial.Count - 1];
+            //var rowIndex = lastKvp.RowIndex;
+            //var columnIndex = lastKvp.ColumnIndex;
 
-            this.Board[rowIndex, columnIndex] = DefaultChar;
+            //this.Board[rowIndex, columnIndex] = DefaultChar;
 
-            this.currentQueenIndex--;
-            this.NumberOfQueens--;
+            //var takenPositions = this.queensTakenPositions[this.currentQueenIndex];
 
-            //TODO: Add Open Positions back
+            //this.currentQueenIndex--;
+            //this.NumberOfQueens--;
+            //this.queensInitial.RemoveAt(this.queensInitial.Count - 1);
+
+            //foreach (var position in takenPositions)
+            //{
+            //    this.avaiblePoistions.Add(position);
+            //}
+            //takenPositions.Clear();
+
+            //this.avaiblePoistions = this.avaiblePoistions.OrderBy(x => x.RowIndex).ThenBy(x => x.ColumnIndex).ToList();
+            //this.avaiblePoistions.RemoveAt(0);
+            //this.avaiblePoistions.Add(lastKvp);
         }
     }
 }

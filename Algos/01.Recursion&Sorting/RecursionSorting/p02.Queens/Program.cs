@@ -23,6 +23,9 @@
             //    {'_','_','_','_','_','_','_','_'}
             //};
 
+            //var a = 5.CompareTo(10);
+            //Console.WriteLine(a);
+
             var queenChar = 'Q';
 
             var chessBoard = new ChessBoard(queenChar);
@@ -41,10 +44,13 @@
                 if (chessBoard.CanPutQueen(out var rowIndex, out var columnIndex))
                 {
                     chessBoard.PutQueen(rowIndex, columnIndex);
-                    FindAllSolutions(chessBoard);
+                }
+                else
+                {
+                    chessBoard.RemoveQueen();
                 }
 
-                chessBoard.RemoveQueen();
+                FindAllSolutions(chessBoard);
                 //if (chessBoard.CanPutQueen())
                 //{
                 //    chessBoard.PutQueen(chessBoard, queenChar, currentRowIndex, currentColumnIndex);
