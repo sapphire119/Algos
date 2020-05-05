@@ -2,81 +2,136 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Runtime.InteropServices;
     using System.Text;
+    using System.Xml.Schema;
 
     public class Program
     {
-        //private const char DefaultChar = '_';
-
         public static void Main()
         {
-            //var chessBoard = new char[,]
-            //{
-            //    { '_','_','_','_','_','_','_','_' },
-            //    {'_','_','_','_','_','_','_','_', },
-            //    {'_','_','_','_','_','_','_','_' },
-            //    {'_','_','_','_','_','_','_','_' },
-            //    {'_','_','_','_','_','_','_','_'},
-            //    {'_','_','_','_','_','_','_','_'},
-            //    {'_','_','_','_','_','_','_','_'},
-            //    {'_','_','_','_','_','_','_','_'}
-            //};
+            var queenChar = '*';
+            var defaultChar = '-';
+            var numberOfSolutions = 0;
 
-            //var a = 5.CompareTo(10);
-            //Console.WriteLine(a);
-
-            var queenChar = 'Q';
-
-            var chessBoard = new ChessBoard(queenChar);
-
-            FindAllSolutions(chessBoard);
+            var chessBoardChars = new char[8, 8];
+            for (int i = 0; i < chessBoardChars.GetLength(0); i++)
+            {
+                for (int j = 0; j < chessBoardChars.GetLength(1); j++)
+                {
+                    chessBoardChars[i, j] = defaultChar;
+                }
+            }
+            FindAllSolutions(chessBoardChars, defaultChar, queenChar, ref numberOfSolutions, 0);
+            //Console.WriteLine("Number of Solutions is: {0}", numberOfSolutions);
         }
 
-        private static void FindAllSolutions(ChessBoard chessBoard)
+
+        private static void FindAllSolutions(char[,] chessBoardChars, char defaultChar, char queenChar, 
+            ref int numberOfSolutions, int index)
         {
-            if (DoesChessBoardContain8Queens(chessBoard))
+            if (index >= chessBoardChars.GetLength(0))
             {
-                PrintSolution(chessBoard);
+                PrintSolution(chessBoardChars, ref numberOfSolutions, queenChar, defaultChar);
             }
             else
             {
-                if (chessBoard.CanPutQueen(out var rowIndex, out var columnIndex))
+                for (int j = 0; j < chessBoardChars.GetLength(1); j++)
                 {
-                    chessBoard.PutQueen(rowIndex, columnIndex);
+                    if (CanPutQueen(chessBoardChars, defaultChar, index, j))
+                    {
+                        var charToPut = Convert.ToChar('a' + index);
+                        MarkQueenSpots(chessBoardChars, index, j, charToPut, defaultChar);
+                        chessBoardChars[index, j] = queenChar;
+                        FindAllSolutions(chessBoardChars, defaultChar, queenChar, ref numberOfSolutions, index + 1);
+                        chessBoardChars[index, j] = defaultChar;
+                        MarkQueenSpots(chessBoardChars, index, j, defaultChar, charToPut);
+                    }
                 }
-                else
-                {
-                    chessBoard.RemoveQueen();
-                }
-
-                FindAllSolutions(chessBoard);
-                //if (chessBoard.CanPutQueen())
-                //{
-                //    chessBoard.PutQueen(chessBoard, queenChar, currentRowIndex, currentColumnIndex);
-                //    FindAllSolutions(chessBoard, queenChar, limitSolutions, currentRowIndex, currentColumnIndex); 
-                //}
-                //else
-                //{
-                //    RemoveQueen(chessBoard, currentRowIndex, currentColumnIndex);
-                //}
             }
         }
 
-        private static bool DoesChessBoardContain8Queens(ChessBoard chessBoard)
+        private static void MarkQueenSpots(char[,] chessBoard, int rowIndex, int columnIndex, char charToMark, char defaultChar)
         {
-            return chessBoard.NumberOfQueens == 8;
+            //Horizontal
+            for (int j = 0; j < chessBoard.GetLength(1); j++)
+            {
+                if (chessBoard[rowIndex, j] == defaultChar) chessBoard[rowIndex, j] = charToMark;
+            }
+            //Vertical
+            for (int i = 0; i < chessBoard.GetLength(0); i++)
+            {
+                if (chessBoard[i, columnIndex] == defaultChar) chessBoard[i, columnIndex] = charToMark;
+            }
+            //Diagonal Right
+
+            var comparer = rowIndex.CompareTo(columnIndex);
+
+            if (comparer < 0)
+            {
+                //2, 3
+                var diff = columnIndex - rowIndex;
+                for (int i = 0, j = diff; i < chessBoard.GetLength(0) && j < chessBoard.GetLength(1); i++, j++)
+                {
+                    if (chessBoard[i, j] == defaultChar)
+                        chessBoard[i, j] = charToMark;
+                }
+            }
+            else if (comparer > 0)
+            {
+                //3, 2
+                var diff = rowIndex - columnIndex;
+                for (int i = diff, j = 0; i < chessBoard.GetLength(0) && j < chessBoard.GetLength(1); i++, j++)
+                {
+                    if (chessBoard[i, j] == defaultChar)
+                        chessBoard[i, j] = charToMark;
+                }
+            }
+            else
+            {
+                for (int i = 0, j = 0; i < chessBoard.GetLength(0) && j < chessBoard.GetLength(1); i++, j++)
+                {
+                    if (chessBoard[i, j] == defaultChar)
+                        chessBoard[i, j] = charToMark;
+                }
+            }
+
+            //Left Diagonal
+            var startRow = rowIndex + columnIndex;
+            var startColumn = 0;
+
+            if (chessBoard.GetLength(0) - 1 < startRow)
+            {
+                startColumn = startRow - (chessBoard.GetLength(0) - 1);
+                startRow = chessBoard.GetLength(0) - 1;
+            }
+
+            for (int i = startRow, j = startColumn; i >= 0 && j < chessBoard.GetLength(1); i--, j++)
+            {
+                if (chessBoard[i, j] == defaultChar)
+                    chessBoard[i, j] = charToMark;
+            }
         }
 
-        private static void PrintSolution(ChessBoard chessBoard)
+        private static bool CanPutQueen(char[,] chessBoard, char defaultChar, int rowIndex, int columnIndex)
+        {
+            return chessBoard[rowIndex, columnIndex] == defaultChar;
+        }
+
+
+        private static void PrintSolution(char[,] chessBoard, ref int numberOfSolutions, char queenChar, char defaultChar)
         {
             var sb = new StringBuilder();
-            for (int i = 0; i < chessBoard.Board.GetLength(0); i++)
+            for (int i = 0; i < chessBoard.GetLength(0); i++)
             {
                 var temp = new StringBuilder();
-                for (int j = 0; j < chessBoard.Board.GetLength(1); j++)
+                for (int j = 0; j < chessBoard.GetLength(1); j++)
                 {
-                    temp.Append(string.Concat(chessBoard.Board[i, j], " "));
+                    if(chessBoard[i, j] == queenChar)
+                        temp.Append(string.Concat(chessBoard[i, j], " "));
+                    else
+                        temp.Append(string.Concat(defaultChar, " "));
                 }
 
                 sb.AppendLine(temp.ToString().Trim());
@@ -84,6 +139,8 @@
 
             var result = sb.ToString().Trim();
             Console.WriteLine(result);
+            Console.WriteLine();
+            numberOfSolutions++;
         }
     }
 }
