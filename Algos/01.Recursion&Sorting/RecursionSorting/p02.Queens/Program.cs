@@ -11,24 +11,77 @@
     {
         public static void Main()
         {
-            var queenChar = '*';
-            var defaultChar = '-';
-            var numberOfSolutions = 0;
+            var n = int.Parse(Console.ReadLine());
+            Enumerate(n);
 
-            var chessBoardChars = new char[8, 8];
-            for (int i = 0; i < chessBoardChars.GetLength(0); i++)
-            {
-                for (int j = 0; j < chessBoardChars.GetLength(1); j++)
-                {
-                    chessBoardChars[i, j] = defaultChar;
-                }
-            }
-            FindAllSolutions(chessBoardChars, defaultChar, queenChar, ref numberOfSolutions, 0);
+            #region OldSolution
+            //var queenChar = '*';
+            //var defaultChar = '-';
+            //var numberOfSolutions = 0;
+
+            //var chessBoardChars = new char[8, 8];
+            //for (int i = 0; i < chessBoardChars.GetLength(0); i++)
+            //{
+            //    for (int j = 0; j < chessBoardChars.GetLength(1); j++)
+            //    {
+            //        chessBoardChars[i, j] = defaultChar;
+            //    }
+            //}
+            //FindAllSolutions(chessBoardChars, defaultChar, queenChar, ref numberOfSolutions, 0);
             //Console.WriteLine("Number of Solutions is: {0}", numberOfSolutions);
+            #endregion
         }
 
+        private static void Enumerate(int n)
+        {
+            int[] arr = new int[n];
+            Enumerate(arr, 0);
+        }
 
-        private static void FindAllSolutions(char[,] chessBoardChars, char defaultChar, char queenChar, 
+        private static void Enumerate(int[] arr, int rowIndex)
+        {
+            if (rowIndex >= arr.Length)
+            {
+                PrintQueens(arr);
+            }
+            else
+            {
+                for (int column = 0; column < arr.Length; column++)
+                {
+                    arr[rowIndex] = column;
+                    if (IsConsistent(arr, rowIndex)) Enumerate(arr, rowIndex + 1);
+                }
+            }
+        }
+
+        private static bool IsConsistent(int[] arr, int rowIndex)
+        {
+            for (int i = 0; i < rowIndex; i++)
+            {
+                if (arr[i] == arr[rowIndex])                    return false;   // same column
+                if ((arr[i] - arr[rowIndex]) == (rowIndex - i)) return false;   // same major diagonal
+                if ((arr[rowIndex] - arr[i]) == (rowIndex - i)) return false;   // same minor diagonal
+            }
+            return true;
+        }
+
+        private static void PrintQueens(int[] arr)
+        {
+            //int n = q.length;
+            for (int i = 0; i < arr.Length; i++)
+            {
+                for (int j = 0; j < arr.Length; j++)
+                {
+                    if (arr[i] == j) Console.Write("Q ");
+                    else Console.Write("* ");
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine();
+        }
+
+        #region Old Solution
+        private static void FindAllSolutions(char[,] chessBoardChars, char defaultChar, char queenChar,
             ref int numberOfSolutions, int index)
         {
             if (index >= chessBoardChars.GetLength(0))
@@ -128,7 +181,7 @@
                 var temp = new StringBuilder();
                 for (int j = 0; j < chessBoard.GetLength(1); j++)
                 {
-                    if(chessBoard[i, j] == queenChar)
+                    if (chessBoard[i, j] == queenChar)
                         temp.Append(string.Concat(chessBoard[i, j], " "));
                     else
                         temp.Append(string.Concat(defaultChar, " "));
@@ -142,5 +195,6 @@
             Console.WriteLine();
             numberOfSolutions++;
         }
+        #endregion
     }
 }
