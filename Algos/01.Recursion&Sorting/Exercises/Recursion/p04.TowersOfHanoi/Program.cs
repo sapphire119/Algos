@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Security.Cryptography;
 
     public class Program
@@ -23,52 +24,103 @@
 
         private static void BuildTower(int input, Stack<int> from, Stack<int> to, Stack<int> spare)
         {
+            if (input > 0)
+            {
+                BuildTower(input - 1, from, to, spare);
+                if (from.Contains(input))
+                {
+                    SetElementsFrom(input, from, to, spare);
+                }
+                else if (spare.Contains(input))
+                {
+                }
+                else if (to.Contains(input))
+                {
+                }
+                
+            }
+
             //n - 1 -> A ... B
+            //SolveTowerByInput(input, from, to, spare);
 
-            BeforeElementSetAtEnd(input - 1, from, to, spare);
             //switch to last element --> A ... C
-
-            var elementToTransfer = from.Pop();
-            if (elementToTransfer == input)
-                to.Push(elementToTransfer);
-            else
-                throw new ArgumentException();
+            //var elementToTransfer = from.Pop();
+            //if (elementToTransfer == input)
+            //    to.Push(elementToTransfer);
+            //else
+            //    throw new ArgumentException();
 
             //n - 1 -> B ... C
-
-            AfterElementSet(input - 1, from, to, spare);
+            //SolveTowerByInput(input - 1, from, to, spare);
         }
 
-        private static void BeforeElementSetAtEnd(int currentEle, Stack<int> from, Stack<int> to, Stack<int> spare)
+        private static void SetElementsFrom(int element, Stack<int> from, Stack<int> to, Stack<int> spare)
         {
-            if (currentEle > 0)
+            if (from.Count > 0)
             {
-                BeforeElementSetAtEnd(currentEle - 1, from, to, spare);
-                if (from.Contains(currentEle))
+                var lastEleFrom = from.Peek();
+                if (from.Count % 2 == 1)
                 {
-                    var toCount = to.Count;
-                    var lastEleTo = to.Peek();
-
-                    if (from.Count % 2 == 1)
+                    if (to.Count > 0)
                     {
-                        currentEle = from.Pop();
-                        //if (currentEle )
-                        //{
-
-                        //}
+                        var toLastEle = to.Peek();
+                        if (element > toLastEle)
+                        {
+                            BuildTower(toLastEle, from, to, spare);
+                        }
                     }
-                    else
-                    {
 
-                    }
+                    to.Push(lastEleFrom);
                 }
-                    
+                else
+                {
+
+                    if (spare.Count > 0)
+                    {
+                        var spareLastEle = spare.Peek();
+                        if (element > spareLastEle)
+                        {
+                            BuildTower(spareLastEle, from, to, spare);
+                        }
+                    }
+
+                    spare.Push(lastEleFrom);
+                }
+
+                from.Pop();
             }
         }
 
-        private static void AfterElementSet(int v, Stack<int> from, Stack<int> to, Stack<int> spare)
-        {
-            throw new NotImplementedException();
-        }
+        //private static void SetElementToStack(int element, Stack<int> currentTargetStack)
+        //{
+        //    //if (currentTargetStack.Count > 0)
+        //    //{
+        //    //    var toLastEle = currentTargetStack.Peek();
+        //    //    if (element > toLastEle)
+        //    //    {
+        //    //        BuildTower(toLastEle, from, to, spare);
+        //    //    }
+        //    //}
+
+        //    //currentTargetStack.Push(lastEleFrom);
+        //}
+
+        //private static void SolveTowerByInput(int currentEle, Stack<int> from, Stack<int> to, Stack<int> spare)
+        //{
+        //    if (currentEle > 0)
+        //    {
+        //        SolveTowerByInput(currentEle - 1, from, to, spare);
+        //        if (from.Contains(currentEle)) 
+        //        {
+        //        }
+        //        else if (to.Contains(currentEle))
+        //        {
+
+        //        }
+        //        else if (spare.Contains(currentEle))
+        //        {
+        //        }
+        //    }
+        //}
     }
 }
