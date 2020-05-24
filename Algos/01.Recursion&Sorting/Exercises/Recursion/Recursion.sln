@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "p01.Index", "Recursion\p01.Index.csproj", "{338AFF6F-6127-40DB-8442-4B9BC5031B8C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "p01.Index", "Recursion\p01.Index.csproj", "{338AFF6F-6127-40DB-8442-4B9BC5031B8C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "p02.NestedLoopRecursion", "p02.NestedLoopRecursion\p02.NestedLoopRecursion.csproj", "{D14E58C2-888D-4139-AE62-153A3F03BDD3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "p02.NestedLoopRecursion", "p02.NestedLoopRecursion\p02.NestedLoopRecursion.csproj", "{D14E58C2-888D-4139-AE62-153A3F03BDD3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "p03.CombinationsWithRepetition", "p03.CombinationsWithRepetition\p03.CombinationsWithRepetition.csproj", "{4FC2E0A2-37E1-4C83-8798-A7EFCAE743F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "p03.CombinationsWithRepetition", "p03.CombinationsWithRepetition\p03.CombinationsWithRepetition.csproj", "{4FC2E0A2-37E1-4C83-8798-A7EFCAE743F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "p04.TowersOfHanoi", "p04.TowersOfHanoi\p04.TowersOfHanoi.csproj", "{B40E68AE-A1B9-4ECA-9383-00ADD8AF185D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "p04.TowersOfHanoi", "p04.TowersOfHanoi\p04.TowersOfHanoi.csproj", "{B40E68AE-A1B9-4ECA-9383-00ADD8AF185D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "p04.1.TowerOfHanoiV2", "p04.1.TowerOfHanoiV2\p04.1.TowerOfHanoiV2.csproj", "{B0F5CB31-A902-4201-A264-0CB5490969AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{B40E68AE-A1B9-4ECA-9383-00ADD8AF185D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B40E68AE-A1B9-4ECA-9383-00ADD8AF185D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B40E68AE-A1B9-4ECA-9383-00ADD8AF185D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0F5CB31-A902-4201-A264-0CB5490969AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0F5CB31-A902-4201-A264-0CB5490969AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0F5CB31-A902-4201-A264-0CB5490969AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0F5CB31-A902-4201-A264-0CB5490969AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

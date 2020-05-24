@@ -3,15 +3,12 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Reflection.PortableExecutable;
-    using System.Runtime.InteropServices;
-    using System.Security.Cryptography;
 
     public class Program
     {
         public static void Main()
         {
-            var input = 3;
+            var input = int.Parse(Console.ReadLine());
 
             var source = new Stack<int>(Enumerable.Range(1, input).Reverse());
             var destination = new Stack<int>();
@@ -31,17 +28,14 @@
 
         private static void BuildTower(int input, int limit, Dictionary<int, Stack<int>> towerHanoi, ref int numberOfIterations)
         {
-            //n - 1 -> A ... B
-            //last ele -> set to position
             if (input <= limit)
             {
+                //n - 1 -> A ... B
+                //last ele -> set to position
                 SetTower(input, limit, towerHanoi, ref numberOfIterations);
                 BuildTower(input + 1, limit, towerHanoi, ref numberOfIterations);
-            }
-            //n - 1 -> B ... C
-            if (input < limit)
-            {
-                SetTower(input, limit, towerHanoi, ref numberOfIterations);
+                //n - 1 -> B ... C
+                SetTower(input - 1, limit, towerHanoi, ref numberOfIterations);
             }
         }
 
@@ -129,7 +123,7 @@
 
         private static void PrintSteps(Dictionary<int, Stack<int>> towerHanoi, int currentEle, ref int numberOfIterations)
         {
-            Console.WriteLine($"Step #{numberOfIterations}: Moved disk {currentEle}");
+            Console.WriteLine($"Step #{numberOfIterations}: Moved disk");
             PrintDisks(towerHanoi);
         }
 
