@@ -2,9 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Drawing;
-    using System.Runtime.InteropServices.ComTypes;
-    using System.Xml.Schema;
+    using System.Linq;
 
     public class Program
     {
@@ -13,7 +11,7 @@
             var inputRows = int.Parse(Console.ReadLine());
             var inputColumns = int.Parse(Console.ReadLine());
 
-            var points = new List<MatrixPoint>();
+            var points = new HashSet<MatrixPoint>();
 
             var wallChar = '*';
 
@@ -29,6 +27,7 @@
                     if (currentCell == wallChar) matrixCellVisited[i, j] = true;
                 }
             }
+
             for (int startRow = 0; startRow < matrix.GetLength(0); startRow++)
             {
                 for (int startCol = 0; startCol < matrix.GetLength(1); startCol++)
@@ -37,58 +36,44 @@
                     {
                         var point = new MatrixPoint(startRow, startCol, 0);
                         points.Add(point);
-                        TraverseArea(startRow, startCol, point);
+                        TraverseArea(startRow, startCol, point, matrixCellVisited);
                     }
-                    
                 }
             }
-            TraverseMatrix(0, 0, wallChar, matrix, matrixCellVisited, points);
+
+            PrintResult(points);
         }
 
-        private static void TraverseMatrix(
-            int startRow,
-            int startCol,
-            char wallChar,
-            char[,] matrix,
-            bool[,] matrixCellVisited,
-            List<MatrixPoint> points)
+        private static bool WithinBounds<T>(int startRow, int startCol, T[,] matrix)
         {
-            //if (!WithinBounds(startRow, startCol, matrix)) return;
-
-            
-            //else
-            //{
-
-
-
-
-            //    //for (int i = 0; i < matrix.GetLength(0); i++)
-            //    //{
-            //    //    for (int j = 0; j < matrix.GetLength(1); j++)
-            //    //    {
-            //    //        var currentEle = matrix[i, j];
-            //    //        if (currentEle == wallChar) continue;
-
-            //    //    }
-            //    //}
-            //}
+            return (startRow < matrix.GetLength(0) && startCol < matrix.GetLength(1)) &&
+                (startRow >= 0 && startCol >= 0);
         }
 
-        private static void TraverseArea(int currentRow, int currentCol, MatrixPoint point)
+        private static void TraverseArea(int currentRow, int currentCol, MatrixPoint point, bool[,] matrixCellVisited)
         {
+            if (!WithinBounds(currentRow, currentCol, matrixCellVisited) || matrixCellVisited[currentRow, currentCol]) return;
+            matrixCellVisited[currentRow, currentCol] = true;
+            point.Size++;
             //Right
-            //TraverseArea(startRow, startCol + 1, point);
+            TraverseArea(currentRow, currentCol + 1, point, matrixCellVisited);
             //Down                                                                   
-            //TraverseArea(startRow + 1, startCol, wallChar, matrix, matrixCellVisited, points);
+            TraverseArea(currentRow + 1, currentCol, point, matrixCellVisited);
             //Left                                                                  
-            //TraverseArea(startRow, startCol - 1, wallChar, matrix, matrixCellVisited, points);
-            //Up                                                                   
-            //TraverseArea(startRow + 1, startCol, wallChar, matrix, matrixCellVisited, points);
+            TraverseArea(currentRow, currentCol - 1, point, matrixCellVisited);
+            //Up
+            TraverseArea(currentRow - 1, currentCol, point, matrixCellVisited);
         }
 
-        private static bool WithinBounds(int startRow, int startCol, char[,] matrix)
+        private static void PrintResult(HashSet<MatrixPoint> points)
         {
-            return startRow < matrix.GetLength(0) && startCol < matrix.GetLength(1);
+            var result = points.OrderByDescending(x => x.Size).ThenBy(x => x.RowStart).ThenBy(x => x.ColStart).ToArray();
+            Console.WriteLine($"Total areas found: {result.Length}");
+            for (int i = 0, areaId = 1; i < result.Length; i++, areaId++)
+            {
+                var point = result[i];
+                Console.WriteLine($"Area #{areaId} at {point}");
+            }
         }
 
         public class MatrixPoint
@@ -104,6 +89,11 @@
             public int ColStart { get; set; }
 
             public int Size { get; set; }
+
+            public override string ToString()
+            {
+                return $"({this.RowStart}, {this.ColStart}), size: {this.Size}";
+            }
         }
     }
 }
