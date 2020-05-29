@@ -1,23 +1,40 @@
 ﻿namespace p01.Index
 {
     using System;
-    using System.Collections.Concurrent;
+    using System.Diagnostics;
     using System.Linq;
 
     public class Program
     {
         public static void Main()
         {
+            //var input = Console.ReadLine().Split(' ').Select(int.Parse).ToArray();
+            //var input = new int[100_000];
+            //for (int i = 0; i < input.Length / 2; i++) input[i] = 10;
+            //input[input.Length / 2] = 20;
+            //for (int i = (input.Length / 2) + 1; i < input.Length; i++) input[i] = 5;
+
+            //Stopwatch stopwatch = new Stopwatch();
+            //stopwatch.Start();
+            //MergeSort(input, 0, input.Length - 1);
+            //stopwatch.Stop();
+            //MergeSort(input, 0, input.Length - 1);
+            //Console.WriteLine(string.Join(" ", input));
+            //Console.WriteLine(string.Join(" ", input));
+
+            //Console.WriteLine($"Elapsed: {stopwatch.ElapsedMilliseconds}");
             //var mergeSortInput = new int[] { 38, 27, 43, 3, 9, 82, 10 };
             //var input = Console.ReadLine().Split(' ').Select(int.Parse).ToArray();
             //MergeSort(input, 0, input.Length - 1);
             //////////////////////////////////////////////////////////////////////
 
-            var quicksortInput = new int[] { 10, 80, 40, 50, 30, 90, 70 };
+            //var quicksortInput = new int[] { 10, 80, 40, 50, 30, 90, 70 };
             //var quicksortInput1 = new int[] { 10, 80, 40, 90, 30, 50, 70 };
             //var quicksortInput2 = new int[] { 10, 80, 40, 30, 50, 90, 70 };
             //var quicksortInput3 = new int[] { 30, 80, 40, 10, 50, 90, 70 };
-
+            //var input = new int[] { 1, 4, 2, -1, 0 };
+            //var input1 = new int[] { 1, 4, -3, -5, 2, 0, -9, -1, -6 };
+            //var input2 = new int[] { 5, 4, 3, 2, 1 };
             //L -> 10, 30, 40, (50)
             //R -> 80, 90, 70
 
@@ -25,7 +42,16 @@
             //Pivot -> 40
             //L -> 10, 30
             //
-            QuickSort(quicksortInput, 0, quicksortInput.Length - 1);
+            //QuickSort(input2, 0, input2.Length - 1);
+            //Console.WriteLine("{0}", string.Join(" ", input2));
+
+            //QuickSort(input, 0, input.Length - 1);
+            //Console.WriteLine("{0}", string.Join(" ", input));
+
+            //QuickSort(input1, 0, input1.Length - 1);
+            //Console.WriteLine("{0}", string.Join(" ", input1));
+
+            //QuickSort(quicksortInput, 0, quicksortInput.Length - 1);
             //QuickSort(quicksortInput1, 0, quicksortInput1.Length - 1);
             //QuickSort(quicksortInput2, 0, quicksortInput2.Length - 1);
             //QuickSort(quicksortInput3, 0, quicksortInput3.Length - 1);
@@ -34,9 +60,13 @@
             //Console.WriteLine("{0}", string.Join(" ", quicksortInput2));
             //Console.WriteLine("{0}", string.Join(" ", quicksortInput3));
         }
+
         //private static void InsertionSort()
         //private static void BubbleSort()
         //private static void ShellSort()
+        //private static void RadixSort()
+
+        #region MergeSort
         private static void MergeSort(int[] arr, int leftIndex, int rightIndex)
         {
             if (rightIndex > leftIndex)
@@ -47,6 +77,7 @@
                 Merge(arr, leftIndex, middle, rightIndex);
             }
         }
+
         private static void Merge(int[] arr, int leftIndex, int middle, int rightIndex)
         {
             var leftArr = new int[middle - leftIndex + 1];
@@ -88,6 +119,9 @@
                 tempIndex++;
             }
         }
+        #endregion
+
+        #region QuickSort
         private static void QuickSort(int[] arr, int leftIndex, int rightIndex)
         {
             if (rightIndex > leftIndex)
@@ -110,10 +144,12 @@
                 if (arr[j] < pivotElement)
                 {
                     i++;
+                    if (arr[i] == pivotElement) pivotIndex = j;
                     Swap(arr, j, i);
                 }
             }
-            if(i + 1 < pivotIndex)
+
+            if (i + 1 < pivotIndex)
                 Swap(arr, i + 1, pivotIndex);
             return (i + 1);
         }
@@ -124,6 +160,11 @@
             arr[indexArr] = arr[currentIndex];
             arr[currentIndex] = temp;
         }
-        //private static void BucketSort()
+        #endregion
+
+        private static void BucketSort()
+        {
+
+        }
     }
 }
