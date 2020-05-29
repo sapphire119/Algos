@@ -63,8 +63,21 @@
 
         //private static void InsertionSort()
         //private static void BubbleSort()
-        //private static void ShellSort()
-        //private static void RadixSort()
+
+        //variation of Insertion Sort, need to implement InsertionSort first
+        #region ShellSort
+        private static void ShellSort()
+        {
+        }
+        #endregion
+
+        //TODO
+        #region RadixSort
+        private static void RadixSort()
+        {
+
+        }
+        #endregion
 
         #region MergeSort
         private static void MergeSort(int[] arr, int leftIndex, int rightIndex)
@@ -162,9 +175,12 @@
         }
         #endregion
 
+
+        //Need to implement first Insertion Sort
+        #region BucketSort
         private static void BucketSort()
         {
-
         }
+        #endregion
     }
 }
