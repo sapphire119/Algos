@@ -1,81 +1,129 @@
 ﻿namespace p01.Index
 {
     using System;
-    using System.Diagnostics;
-    using System.Linq;
+    using System.Collections.Generic;
 
     public class Program
     {
         public static void Main()
         {
-            //var input = Console.ReadLine().Split(' ').Select(int.Parse).ToArray();
-            //var input = new int[100_000];
-            //for (int i = 0; i < input.Length / 2; i++) input[i] = 10;
-            //input[input.Length / 2] = 20;
-            //for (int i = (input.Length / 2) + 1; i < input.Length; i++) input[i] = 5;
+            //MergeSort
+            //QuickSort
 
-            //Stopwatch stopwatch = new Stopwatch();
-            //stopwatch.Start();
-            //MergeSort(input, 0, input.Length - 1);
-            //stopwatch.Stop();
-            //MergeSort(input, 0, input.Length - 1);
+            #region Bubble Sort
+            //var input = new[] { 5, 1, 4, 2, 8 };
+            //var input = new[] { 1, 4, 2, -1, 0, 15, 12, 9, -100, 50, 32, -8 };
+
+            //BubbleSort(input);
             //Console.WriteLine(string.Join(" ", input));
+            #endregion
+
+            #region InsertionSort
+            //var input = new[] { 1, 4, 2, -1, 0, 15, 12, 9, -100, 50, 32, -8 };
+            //var input = new[] { 4, 3, 2, 10, 12, 1, 5, 6 };
+
+            //InsertionSort(input);
             //Console.WriteLine(string.Join(" ", input));
+            #endregion
 
-            //Console.WriteLine($"Elapsed: {stopwatch.ElapsedMilliseconds}");
-            //var mergeSortInput = new int[] { 38, 27, 43, 3, 9, 82, 10 };
-            //var input = Console.ReadLine().Split(' ').Select(int.Parse).ToArray();
-            //MergeSort(input, 0, input.Length - 1);
-            //////////////////////////////////////////////////////////////////////
-
-            //var quicksortInput = new int[] { 10, 80, 40, 50, 30, 90, 70 };
-            //var quicksortInput1 = new int[] { 10, 80, 40, 90, 30, 50, 70 };
-            //var quicksortInput2 = new int[] { 10, 80, 40, 30, 50, 90, 70 };
-            //var quicksortInput3 = new int[] { 30, 80, 40, 10, 50, 90, 70 };
-            //var input = new int[] { 1, 4, 2, -1, 0 };
-            //var input1 = new int[] { 1, 4, -3, -5, 2, 0, -9, -1, -6 };
-            //var input2 = new int[] { 5, 4, 3, 2, 1 };
-            //L -> 10, 30, 40, (50)
-            //R -> 80, 90, 70
-
-            //Assume -> 10 40 30
-            //Pivot -> 40
-            //L -> 10, 30
-            //
-            //QuickSort(input2, 0, input2.Length - 1);
-            //Console.WriteLine("{0}", string.Join(" ", input2));
-
-            //QuickSort(input, 0, input.Length - 1);
-            //Console.WriteLine("{0}", string.Join(" ", input));
-
-            //QuickSort(input1, 0, input1.Length - 1);
-            //Console.WriteLine("{0}", string.Join(" ", input1));
-
-            //QuickSort(quicksortInput, 0, quicksortInput.Length - 1);
-            //QuickSort(quicksortInput1, 0, quicksortInput1.Length - 1);
-            //QuickSort(quicksortInput2, 0, quicksortInput2.Length - 1);
-            //QuickSort(quicksortInput3, 0, quicksortInput3.Length - 1);
-            //Console.WriteLine("{0}", string.Join(" ", quicksortInput));
-            //Console.WriteLine("{0}", string.Join(" ", quicksortInput1));
-            //Console.WriteLine("{0}", string.Join(" ", quicksortInput2));
-            //Console.WriteLine("{0}", string.Join(" ", quicksortInput3));
+            #region Radix Sort
+            //k = 9 (Number of possible digits)
+            //N > 0
+            //var buckets = new Dictionary<int, Queue<int>>();
+            //for (int i = 0; i < 10; i++) buckets[i] = new Queue<int>();
+            //var input = new int[] { 3221, 1, 10, 9680, 577, 9420, 7, 5622, 4793, 2030, 3138, 82, 2599, 743, 4127 };
+            //var maxDigitsCount = GetMaxLimitingDigit(input);
+            //RadixSort(input, buckets, 0, maxDigitsCount);
+            //Console.WriteLine(string.Join(" ", input));
+            #endregion
         }
 
-        //private static void InsertionSort()
-        //private static void BubbleSort()
-
-        //variation of Insertion Sort, need to implement InsertionSort first
-        #region ShellSort
-        private static void ShellSort()
+        #region BubbleSort
+        private static void BubbleSort(int[] arr)
         {
+            while (true)
+            {
+                var comparePairsCount = 0;
+                for (int i = 0, j = 1; j < arr.Length; i++, j++)
+                {
+                    var firstEle = arr[i];
+                    var secondEle = arr[j];
+                    if (firstEle > secondEle)
+                    {
+                        comparePairsCount++;
+                        SwapBubbleSort(arr, i, j);
+                    }
+                }
+                if (comparePairsCount == 0) break;
+            }
+
+            //for (int i = 0; i < arr.Length; i++)
+            //    for (int j = 0; j < arr.Length - i - 1; j++)
+            //    {
+            //        if (arr[j] > arr[j + 1])
+            //        {
+            //            SwapBubbleSort(arr, j, j + 1);
+            //        }
+            //    }
+        }
+
+        private static void SwapBubbleSort<T>(T[] arr, int currentIndex, int indexArr)
+        {
+            var temp = arr[indexArr];
+            arr[indexArr] = arr[currentIndex];
+            arr[currentIndex] = temp;
+        }
+
+        #endregion
+
+        #region InsertionSort
+        private static void InsertionSort(int[] arr)
+        {
+            for (int i = 0; i < arr.Length; i++)
+            {
+                var swapIndex = -1;
+                for (int j = i; j >= 0; j--)
+                {
+                    if (arr[i] < arr[j])
+                    {
+                        swapIndex = j;
+                    }
+                }
+                if (swapIndex >= 0)
+                {
+                    for (int p = swapIndex; p < i; p++)
+                    {
+                        var temp = arr[p];
+                        arr[p] = arr[i];
+                        arr[i] = temp;
+                    }
+                }
+            }
+
+            //int n = arr.Length;
+            //for (int i = 1; i < n; ++i)
+            //{
+            //    int key = arr[i];
+            //    int j = i - 1;
+
+            //    // Move elements of arr[0..i-1], 
+            //    // that are greater than key, 
+            //    // to one position ahead of 
+            //    // their current position 
+            //    while (j >= 0 && arr[j] > key)
+            //    {
+            //        arr[j + 1] = arr[j];
+            //        j = j - 1;
+            //    }
+            //    arr[j + 1] = key;
+            //}
         }
         #endregion
 
-        //TODO
-        #region RadixSort
-        private static void RadixSort()
+        //Similar to Counting/Radix Sort
+        #region BucketSort
+        private static void BucketSort()
         {
-
         }
         #endregion
 
@@ -135,6 +183,8 @@
         #endregion
 
         #region QuickSort
+
+        //QuickSort with Middle pivot
         private static void QuickSort(int[] arr, int leftIndex, int rightIndex)
         {
             if (rightIndex > leftIndex)
@@ -175,12 +225,70 @@
         }
         #endregion
 
+        #region RadixSort
 
-        //Need to implement first Insertion Sort
-        #region BucketSort
-        private static void BucketSort()
+        //Only positive
+        private static void RadixSort(int[] arr, Dictionary<int, Queue<int>> buckets, int currentDigit, int maxDigitsCount)
         {
+            if (currentDigit <= maxDigitsCount)
+            {
+                //Move elements into Buckets
+                for (int i = 0; i < arr.Length; i++)
+                {
+                    //Move element into bucket
+                    var currentEle = arr[i];
+                    //Probabbly move to Dictionary < element, number of digits>
+                    var currentEleDigits = GetDigitsCount(currentEle);
+                    if (currentDigit <= currentEleDigits)
+                    {
+                        var nthDigit = GetDigit(currentEle, currentDigit);
+                        buckets[nthDigit].Enqueue(currentEle);
+                    }
+                    else
+                    {
+                        buckets[0].Enqueue(currentEle);
+                    }
+                }
+
+                //Move elements from Bucket to Arr
+                for (int i = 0, index = 0; i < buckets.Values.Count; i++)
+                {
+                    var currentBucket = buckets[i];
+                    while (currentBucket.Count != 0)
+                    {
+                        arr[index++] = currentBucket.Dequeue();
+                    }
+                }
+
+                RadixSort(arr, buckets, currentDigit + 1, maxDigitsCount);
+            }
         }
+
+        private static int GetMaxLimitingDigit(int[] arr)
+        {
+            var maxDigit = -1;
+            for (int i = 0; i < arr.Length; i++)
+            {
+                var currentDigitsCount = GetDigitsCount(arr[i]);
+                if (maxDigit < currentDigitsCount)
+                {
+                    maxDigit = currentDigitsCount;
+                }
+            }
+
+            return maxDigit;
+        }
+
+        private static int GetDigitsCount(int currentEle)
+        {
+            return (int)Math.Floor(Math.Log(currentEle, 10));
+        }
+
+        private static int GetDigit(int currentEle, int currentDigit)
+        {
+            return (currentEle / (int)Math.Pow(10, currentDigit)) % 10;
+        }
+
         #endregion
     }
 }
