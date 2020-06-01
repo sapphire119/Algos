@@ -25,11 +25,19 @@
             //Console.WriteLine(element);
             #endregion
 
-            var input = new[] { 1, 2, 3, 4, 5 };
-            var input1 = new[] { 2, 3, 4, 10, 40 };
+            #region Fibonacci Search
+            //var input = new[] { 1, 2, 3, 4, 5 };
+            //var input1 = new[] { 2, 3, 4, 10, 40 };
+            //var input2 = new[] { 10, 15, 30, 60, 90, 100, 120 };
+            //var input3 = new[] { 10, 20, 30 };
 
             //Console.WriteLine(string.Join(", ", GenerateFibonacciNumber()));
-            FibonacciSearch(input1, 10);
+            //FibonacciSearch(input1, 10, -1);
+            var input = Console.ReadLine().Split(' ').Select(int.Parse).ToArray();
+            var elementToSearch = int.Parse(Console.ReadLine());
+            var result = FibonacciSearch(input, elementToSearch);
+            Console.WriteLine(result);
+            #endregion
         }
 
         #region Binary Search
@@ -57,13 +65,32 @@
         }
         #endregion
 
+        #region Fibonacci Search
         private static int FibonacciSearch(int[] arr, int elementToSearch)
         {
             var fibMIndex = GetFibNumberGreaterOrEqualToArrLength(arr.Length);
-            var fibMNumber = Fibs[fibMIndex];
+            var offset = -1;
+            while (fibMIndex > 1)
+            {
+                int currentIndex = Math.Min(offset + Fibs[fibMIndex - 2], arr.Length - 1);
+                if (arr[currentIndex] < elementToSearch)
+                {
+                    offset = currentIndex;
+                    fibMIndex -= 1;
+                }
+                else if (arr[currentIndex] > elementToSearch)
+                {
+                    fibMIndex -= 2;
+                }
+                else
+                {
+                    return currentIndex;
+                }
+            }
+            //if (Fibs[fibMIndex - 1] == 1 && arr[offset + 1] == elementToSearch)
+            //    return offset + 1;
 
-
-            return default;
+            return -1;
         }
 
         private static int GetFibNumberGreaterOrEqualToArrLength(int currentLength)
@@ -71,8 +98,8 @@
             var fibMIndex = -1;
             for (int i = 0; i < Fibs.Length; i++)
             {
+                fibMIndex = i;
                 if (Fibs[i] > currentLength) break;
-                fibMIndex = Fibs[i];
             }
 
             return fibMIndex;
@@ -95,5 +122,6 @@
 
             return numbers;
         }
+        #endregion
     }
 }
