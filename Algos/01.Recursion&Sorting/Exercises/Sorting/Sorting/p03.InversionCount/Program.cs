@@ -1,39 +1,40 @@
 ﻿namespace p03.InversionCount
 {
     using System;
+    using System.Diagnostics;
     using System.Linq;
 
     public class Program
     {
-        private static int inversions = 0;
-
         public static void Main()
         {
             //var input = new[] { 5, 4, 3, 2, 1 };
             //var input = new[] { 2, 4, 1, 3, 5 };
             //var input = new[] { 8, 4, 2, 1 };
-            var input = new[] { 38, 27, 43, 3, 9, 82, 10 };
+            //var input = new[] { 38, 27, 43, 3, 9, 82, 10 };
             //var input = new[] { 1, 2, 3, 4, 5 };
-            //var input = Console.ReadLine().Split(' ').Select(int.Parse).ToArray();
-            MergeSort(input, 0, input.Length - 1);
+            var input = Console.ReadLine().Split(' ').Select(int.Parse).ToArray();
+            var inversionCount = MergeSort(input, 0, input.Length - 1, 0);
             //Console.WriteLine(string.Join(" ", input));
-            Console.WriteLine(inversions);
+            Console.WriteLine(inversionCount);
+            //Console.WriteLine(inversions);
         }
 
-        private static void MergeSort(int[] arr, int leftIndex, int rightIndex)
+        private static int MergeSort(int[] arr, int leftIndex, int rightIndex, int inversionsCount)
         {
             if (rightIndex > leftIndex)
             {
-                var inversions = 0;
                 //https://www.techiedelight.com/inversion-count-array/
                 var middle = (leftIndex + rightIndex) / 2;
-                MergeSort(arr, leftIndex, middle);
-                MergeSort(arr, middle + 1, rightIndex);
-                Merge(arr, leftIndex, middle, rightIndex);
+                inversionsCount = MergeSort(arr, leftIndex, middle, inversionsCount);
+                inversionsCount = MergeSort(arr, middle + 1, rightIndex, inversionsCount);
+                inversionsCount = Merge(arr, leftIndex, middle, rightIndex, inversionsCount);
             }
+
+            return inversionsCount;
         }
 
-        private static void Merge(int[] arr, int leftIndex, int middle, int rightIndex)
+        private static int Merge(int[] arr, int leftIndex, int middle, int rightIndex, int inversionsCount)
         {
             var leftArr = new int[middle - leftIndex + 1];
             var rightArr = new int[rightIndex - middle];
@@ -66,6 +67,7 @@
                 {
                     arr[tempIndex] = rightArr[startRight];
                     startRight++;
+                    inversionsCount += ((middle + 1) - (leftIndex + startLeft));
                     //multiplier++;
                 }
                 else
@@ -93,6 +95,8 @@
             }
 
             //result += (multiplier * counter);
+
+            return inversionsCount;
         }
     }
 }
