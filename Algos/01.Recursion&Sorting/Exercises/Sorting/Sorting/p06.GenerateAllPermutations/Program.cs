@@ -5,24 +5,23 @@
 
     public class Program
     {
-        private static int count = 0;
+        //private static int count = 0;
 
         public static void Main()
         {
-            var input = int.Parse(Console.ReadLine());
-            var arr = Enumerable.Range(1, input).ToArray();
-            var vector = new int[input];
-            var freePositions = new int[input];
-            Permutations(arr, vector, freePositions, 0);
-            Console.WriteLine(count);
+            var input = "abca".ToCharArray();
+            //var arr = Enumerable.Range(1, input).ToArray();
+            var vector = new char[input.Length];
+            var freePositions = new int[input.Length];
+            Permutations(input, vector, freePositions, 0);
+            //Console.WriteLine(count);
         }
 
         private static void Permutations(
-            int[] arr, int[] vector, int[] freePositions, int index)
+            char[] arr, char[] vector, int[] freePositions, int index)
         {
             if (index == arr.Length)
             {
-                count++;
                 Console.WriteLine(string.Join("", vector));
             }
             else
