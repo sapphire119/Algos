@@ -1,48 +1,55 @@
-﻿namespace p06.GenerateAllPermutations
+﻿namespace Words
 {
     using System;
-    using System.Linq;
+    using System.Collections.Generic;
 
-    public class Program
+    public class WordsMain
     {
-        //private static int count = 0;
+        private static int resultsCount = 0;
 
-        public static void Main()
+        static void Main(string[] args)
         {
-            var input = "abca".ToCharArray();
-            //var arr = Enumerable.Range(1, input).ToArray();
-            var vector = new char[input.Length];
-            var freePositions = new int[input.Length];
-            Permutations(input, vector, freePositions, 0);
-            //Console.WriteLine(count);
+            var source = Console.ReadLine().ToCharArray();
+            PermWithoutRepetitions(source, 0);
+            Console.WriteLine(resultsCount);
         }
 
-        private static void Permutations(
-            char[] arr, char[] vector, int[] freePositions, int index)
+        private static void PermWithoutRepetitions(char[] source, int index)
         {
-            if (index == arr.Length)
+            if (index >= source.Length)
             {
-                Console.WriteLine(string.Join("", vector));
+                for (int i = 0; i < source.Length - 1; i++)
+                {
+                    if (source[i] == source[i + 1])
+                    {
+                        return;
+                    }
+                }
+
+                resultsCount++;
             }
             else
             {
-                for (int currentIndex = 0; currentIndex < arr.Length; currentIndex++)
+                var swapped = new HashSet<char>();
+                for (int k = index; k < source.Length; k++)
                 {
-                    if (freePositions[currentIndex] != 1)
+                    if (!swapped.Contains(source[k]))
                     {
-                        vector[index] = arr[currentIndex];
-                        freePositions[currentIndex] = 1;
-                        Permutations(arr, vector, freePositions, index + 1);
-                        freePositions[currentIndex] = 0;
+                        Swap(ref source[index], ref source[k]);
+                        PermWithoutRepetitions(source, index + 1);
+                        Swap(ref source[index], ref source[k]);
+
+                        swapped.Add(source[k]);
                     }
                 }
             }
-            //123
-            //132
-            //213
-            //231
-            //312
-            //321
+        }
+
+        private static void Swap(ref char i, ref char k)
+        {
+            var temp = i;
+            i = k;
+            k = temp;
         }
     }
 }
