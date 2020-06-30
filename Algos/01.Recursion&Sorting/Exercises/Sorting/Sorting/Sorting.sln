@@ -13,10 +13,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "p04.Words", "p04.Words\p04.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "p06.GenerateAllPermutations", "p06.GenerateAllPermutations\p06.GenerateAllPermutations.csproj", "{B649DD1F-36B5-4CB4-87DE-A11CF8256481}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "p07.PermutationsRegular", "p07.PermutationsRegular\p07.PermutationsRegular.csproj", "{8FBE62FE-FC90-4C9F-9021-73C2B13BDB90}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "05.Needles", "05.Needles\05.Needles.csproj", "{3713CA6F-B942-4A04-8ACA-F9DBC671835D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,14 +39,6 @@ Global
 		{B649DD1F-36B5-4CB4-87DE-A11CF8256481}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B649DD1F-36B5-4CB4-87DE-A11CF8256481}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B649DD1F-36B5-4CB4-87DE-A11CF8256481}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8FBE62FE-FC90-4C9F-9021-73C2B13BDB90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8FBE62FE-FC90-4C9F-9021-73C2B13BDB90}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8FBE62FE-FC90-4C9F-9021-73C2B13BDB90}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8FBE62FE-FC90-4C9F-9021-73C2B13BDB90}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3713CA6F-B942-4A04-8ACA-F9DBC671835D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3713CA6F-B942-4A04-8ACA-F9DBC671835D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3713CA6F-B942-4A04-8ACA-F9DBC671835D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3713CA6F-B942-4A04-8ACA-F9DBC671835D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
