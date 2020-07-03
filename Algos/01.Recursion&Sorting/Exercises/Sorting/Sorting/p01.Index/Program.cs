@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Text;
 
     public class Program
     {
@@ -10,32 +11,45 @@
             //MergeSort
             //QuickSort
 
-            #region Bubble Sort
-            //var input = new[] { 5, 1, 4, 2, 8 };
-            //var input = new[] { 1, 4, 2, -1, 0, 15, 12, 9, -100, 50, 32, -8 };
 
-            //BubbleSort(input);
-            //Console.WriteLine(string.Join(" ", input));
-            #endregion
+            var sb = new StringBuilder();
+            sb.AppendLine("asdasdasdasd");
+            sb.AppendLine("asdasdasdasd");
+            sb.AppendLine("asdasdasdasd");
+            sb.AppendLine("asdasdasdasd");
+            sb.AppendLine("asdasdasdasd");
 
-            #region InsertionSort
-            //var input = new[] { 1, 4, 2, -1, 0, 15, 12, 9, -100, 50, 32, -8 };
-            //var input = new[] { 4, 3, 2, 10, 12, 1, 5, 6 };
+            Console.WriteLine(sb.ToString().Trim());
+            Console.WriteLine("after");
+            sb.AppendLine("1");
+            sb.AppendLine("asd");
+            Console.WriteLine(sb.ToString().Trim());
+            //#region Bubble Sort
+            ////var input = new[] { 5, 1, 4, 2, 8 };
+            ////var input = new[] { 1, 4, 2, -1, 0, 15, 12, 9, -100, 50, 32, -8 };
 
-            //InsertionSort(input);
-            //Console.WriteLine(string.Join(" ", input));
-            #endregion
+            ////BubbleSort(input);
+            ////Console.WriteLine(string.Join(" ", input));
+            //#endregion
 
-            #region Radix Sort
-            //k = 9 (Number of possible digits)
-            //N > 0
-            //var buckets = new Dictionary<int, Queue<int>>();
-            //for (int i = 0; i < 10; i++) buckets[i] = new Queue<int>();
-            //var input = new int[] { 3221, 1, 10, 9680, 577, 9420, 7, 5622, 4793, 2030, 3138, 82, 2599, 743, 4127 };
-            //var maxDigitsCount = GetMaxLimitingDigit(input);
-            //RadixSort(input, buckets, 0, maxDigitsCount);
-            //Console.WriteLine(string.Join(" ", input));
-            #endregion
+            //#region InsertionSort
+            ////var input = new[] { 1, 4, 2, -1, 0, 15, 12, 9, -100, 50, 32, -8 };
+            ////var input = new[] { 4, 3, 2, 10, 12, 1, 5, 6 };
+
+            ////InsertionSort(input);
+            ////Console.WriteLine(string.Join(" ", input));
+            //#endregion
+
+            //#region Radix Sort
+            ////k = 9 (Number of possible digits)
+            ////N > 0
+            ////var buckets = new Dictionary<int, Queue<int>>();
+            ////for (int i = 0; i < 10; i++) buckets[i] = new Queue<int>();
+            ////var input = new int[] { 3221, 1, 10, 9680, 577, 9420, 7, 5622, 4793, 2030, 3138, 82, 2599, 743, 4127 };
+            ////var maxDigitsCount = GetMaxLimitingDigit(input);
+            ////RadixSort(input, buckets, 0, maxDigitsCount);
+            ////Console.WriteLine(string.Join(" ", input));
+            //#endregion
         }
 
         #region BubbleSort
@@ -290,5 +304,15 @@
         }
 
         #endregion
+    }
+
+    public class Test
+    {
+        public Test(string a)
+        {
+            this.A = a; 
+        }
+
+        public string A { get; set; }
     }
 }
