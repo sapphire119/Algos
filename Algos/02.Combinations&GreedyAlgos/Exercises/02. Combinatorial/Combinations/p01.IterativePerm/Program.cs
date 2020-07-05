@@ -14,7 +14,7 @@
             var directionArr = new bool[input.Length];
             var positions = Enumerable.Range(0, input.Length).ToArray();
 
-            JasonTrotter(input, directionArr, positions, input.Length - 1);
+            SteinhausJohnsonTrotter(input, directionArr, positions, input.Length - 1);
         }
 
         private static bool ChangeSign(bool[] signArr, int currentEleSignIndex, out int changeCount)
@@ -36,7 +36,7 @@
             arr[secondIndex] = temp;
         }
 
-        private static void JasonTrotter(char[] elements, bool[] signArr, int[] positions, int currentEleSignIndex)
+        private static void SteinhausJohnsonTrotter(char[] elements, bool[] signArr, int[] positions, int currentEleSignIndex)
         {
             Console.WriteLine(string.Join(" ", elements));
             while (currentEleSignIndex >= 0)
