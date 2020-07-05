@@ -51,26 +51,5 @@
             i = k;
             k = temp;
         }
-
-        //JohnsonTrotter support methods
-
-        private static bool ChangeSign(bool[] signArr, int currentEleSignIndex, out int changeCount)
-        {
-            changeCount = 0;
-            for (int i = currentEleSignIndex + 1; i < signArr.Length; i++, changeCount++) signArr[i] = !signArr[i];
-            return changeCount > 0;
-        }
-
-        private static int CalcNextIndex(bool[] signArr, int currentEleSignIndex, int currentIndex)
-        {
-            return !signArr[currentEleSignIndex] ? currentIndex - 1 : currentIndex + 1;
-        }
-
-        private static void Switch<T>(T[] arr, int firstIndex, int secondIndex)
-        {
-            var temp = arr[firstIndex];
-            arr[firstIndex] = arr[secondIndex];
-            arr[secondIndex] = temp;
-        }
     }
 }
