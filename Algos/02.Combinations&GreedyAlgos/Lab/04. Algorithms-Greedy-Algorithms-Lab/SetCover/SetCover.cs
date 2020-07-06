@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Security.Cryptography.X509Certificates;
 
     public class SetCover
     {
@@ -29,8 +30,22 @@
 
         public static List<int[]> ChooseSets(IList<int[]> sets, IList<int> universe)
         {
-            // TODO
-            throw new NotImplementedException();
+            var result = new List<int[]>();
+
+            var tempUniverse = new HashSet<int>(universe);
+            var tempSets = new HashSet<int[]>(sets);
+
+            while (tempUniverse.Count > 0)
+            {
+                int[] set = tempSets.OrderByDescending(x => x.Count(tempUniverse.Contains)).First();
+                result.Add(set);
+                foreach (var item in set)
+                {
+                    tempUniverse.Remove(item);
+                }
+            }
+
+            return result;
         }
     }
 }

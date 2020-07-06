@@ -22,8 +22,29 @@
 
         public static Dictionary<int, int> ChooseCoins(IList<int> coins, int targetSum)
         {
-            // TODO
-            throw new NotImplementedException();
+            var result = new Dictionary<int, int>();
+            coins = coins.OrderByDescending(x => x).ToList();
+
+            var tempOldSum = targetSum;
+            var tempSum = 0;
+            var tempIndex = 0;
+
+            while (tempIndex < coins.Count && tempSum != targetSum)
+            {
+                var currentCoinValue = coins[tempIndex];
+                if (currentCoinValue + tempSum > targetSum) { tempIndex++; continue; }
+
+                var coinsCount = tempOldSum / currentCoinValue;
+                var temp = (coinsCount * currentCoinValue);
+
+                result.Add(currentCoinValue, coinsCount);
+                tempSum += temp;
+                tempOldSum -= temp;
+            }
+
+            if (tempSum != targetSum) throw new InvalidOperationException();
+
+            return result;
         }
     }
 }
