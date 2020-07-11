@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "p01.FractionalKnapsack", "p01.FractionalKnapsack\p01.FractionalKnapsack.csproj", "{DE13467D-C785-46DA-965D-9FF6D4974C64}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "p01.FractionalKnapsack", "p01.FractionalKnapsack\p01.FractionalKnapsack.csproj", "{DE13467D-C785-46DA-965D-9FF6D4974C64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "p02.Processor Scheduling", "p02.Processor Scheduling\p02.Processor Scheduling.csproj", "{56710076-CB56-4CF0-86C5-6CBB56D8DEC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "p02.Processor Scheduling", "p02.Processor Scheduling\p02.Processor Scheduling.csproj", "{56710076-CB56-4CF0-86C5-6CBB56D8DEC4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "p03.Knight's Tour", "p03.Knight's Tour\p03.Knight's Tour.csproj", "{38BC821B-3DC5-4C18-A028-A9503AF8C212}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{56710076-CB56-4CF0-86C5-6CBB56D8DEC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56710076-CB56-4CF0-86C5-6CBB56D8DEC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56710076-CB56-4CF0-86C5-6CBB56D8DEC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38BC821B-3DC5-4C18-A028-A9503AF8C212}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38BC821B-3DC5-4C18-A028-A9503AF8C212}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38BC821B-3DC5-4C18-A028-A9503AF8C212}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38BC821B-3DC5-4C18-A028-A9503AF8C212}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

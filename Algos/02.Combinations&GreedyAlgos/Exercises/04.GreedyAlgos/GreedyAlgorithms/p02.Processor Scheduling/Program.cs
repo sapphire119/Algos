@@ -11,6 +11,7 @@
             var inputTasks = int.Parse(Console.ReadLine().Split(' ')[1]);
             var tasks = new List<Task>();
             var maxDeadline = -1;
+            
             for (int i = 0; i < inputTasks; i++)
             {
                 var tokens = Console.ReadLine().Split('-');
