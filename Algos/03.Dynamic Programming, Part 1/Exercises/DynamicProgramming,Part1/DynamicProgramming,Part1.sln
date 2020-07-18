@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30309.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "p01.BinomialCoefficient", "p01.BinomialCoefficient\p01.BinomialCoefficient.csproj", "{73022964-4D70-48B4-8628-5325B2ABC386}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{73022964-4D70-48B4-8628-5325B2ABC386}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73022964-4D70-48B4-8628-5325B2ABC386}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73022964-4D70-48B4-8628-5325B2ABC386}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73022964-4D70-48B4-8628-5325B2ABC386}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {02499CEA-839D-401E-B647-7AFAB1197C57}
+	EndGlobalSection
+EndGlobal
