@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30309.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "p01.BinomialCoefficient", "p01.BinomialCoefficient\p01.BinomialCoefficient.csproj", "{73022964-4D70-48B4-8628-5325B2ABC386}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "p01.BinomialCoefficient", "p01.BinomialCoefficient\p01.BinomialCoefficient.csproj", "{73022964-4D70-48B4-8628-5325B2ABC386}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "p02.Longest Zig-Zag Subsequence", "p02.Longest Zig-Zag Subsequence\p02.Longest Zig-Zag Subsequence.csproj", "{A270408A-5973-48AF-811B-4E5BFF5602B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "p02.Longest Zig-Zag Subsequence", "p02.Longest Zig-Zag Subsequence\p02.Longest Zig-Zag Subsequence.csproj", "{A270408A-5973-48AF-811B-4E5BFF5602B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "p03.DividingPresents", "p03.DividingPresents\p03.DividingPresents.csproj", "{DC0ECC16-017E-4B5F-BB4B-3281CD86DC57}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{A270408A-5973-48AF-811B-4E5BFF5602B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A270408A-5973-48AF-811B-4E5BFF5602B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A270408A-5973-48AF-811B-4E5BFF5602B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC0ECC16-017E-4B5F-BB4B-3281CD86DC57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC0ECC16-017E-4B5F-BB4B-3281CD86DC57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC0ECC16-017E-4B5F-BB4B-3281CD86DC57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC0ECC16-017E-4B5F-BB4B-3281CD86DC57}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

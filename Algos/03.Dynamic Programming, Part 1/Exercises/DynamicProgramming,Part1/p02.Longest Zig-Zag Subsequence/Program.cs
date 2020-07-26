@@ -40,7 +40,6 @@
                         {
                             AddNewSequence(sequence, currentEntry.Value, currentEntry.Sequences);
                         }
-
                     }
                 }
             }
