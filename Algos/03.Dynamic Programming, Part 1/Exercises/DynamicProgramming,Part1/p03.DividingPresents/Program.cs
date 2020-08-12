@@ -29,6 +29,7 @@
             var bensHalf = totalSum - alansHalf;
 
             FetchAlansPresents(input, totalSum, bensHalf, new List<int>(), input.Length - 1, 0, 1, positionSum);
+            
 
             var difference = (bensHalf - alansHalf) + 2 * minDiff;
             Console.WriteLine($"Difference: {difference}");
@@ -49,8 +50,7 @@
             for (int i = startIndex, iteration = 1; i >= 0; i--, iteration++)
             {
                 var currentEntry = input[i];
-                var checkCondition = currentEntry + accumulatedSum + positionSum[i] < bensHalf;
-                if (startIndex >= 0 && checkCondition) break;
+                if (startIndex >= 0 && currentEntry + accumulatedSum + positionSum[i] < bensHalf) break;
 
                 var totalLeft = totalSum - currentEntry;
                 if (totalLeft > bensHalf)
