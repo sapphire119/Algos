@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "p02.Longest Zig-Zag Subsequ
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "p03.DividingPresents", "p03.DividingPresents\p03.DividingPresents.csproj", "{DC0ECC16-017E-4B5F-BB4B-3281CD86DC57}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "p03.DividingPresents.01", "p03.DividingPresents.01\p03.DividingPresents.01.csproj", "{9FEF2F17-9782-46EE-A985-671339278CFD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "p03.DividingPresents.01", "p03.DividingPresents.01\p03.DividingPresents.01.csproj", "{9FEF2F17-9782-46EE-A985-671339278CFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "p04.SumWithUnlimitedAmountOfCoins", "p04.SumWithUnlimitedAmountOfCoins\p04.SumWithUnlimitedAmountOfCoins.csproj", "{6B380751-A7D7-4EB5-BC38-58A86B57B79B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "p04.SumWithUnlimitedAmountOfCoins", "p04.SumWithUnlimitedAmountOfCoins\p04.SumWithUnlimitedAmountOfCoins.csproj", "{6B380751-A7D7-4EB5-BC38-58A86B57B79B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "p05.SumWithLimitedCoins", "p05.SumWithLimitedCoins\p05.SumWithLimitedCoins.csproj", "{53C0933F-7A92-4CC0-830B-2F6315010F4E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{6B380751-A7D7-4EB5-BC38-58A86B57B79B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B380751-A7D7-4EB5-BC38-58A86B57B79B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B380751-A7D7-4EB5-BC38-58A86B57B79B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53C0933F-7A92-4CC0-830B-2F6315010F4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53C0933F-7A92-4CC0-830B-2F6315010F4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53C0933F-7A92-4CC0-830B-2F6315010F4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53C0933F-7A92-4CC0-830B-2F6315010F4E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
