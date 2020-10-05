@@ -13,48 +13,81 @@ public class TopologicalSorter
         this.predecesorCount = new Dictionary<string, int>();
     }
 
-
     public ICollection<string> TopSort()
     {
-        GetPredecessorCount(this.graph);
-        var result = new List<string>();
-
-        while (true)
+        LinkedList<string> sorted = new LinkedList<string>();
+        HashSet<string> visited = new HashSet<string>();
+        HashSet<string> cycles = new HashSet<string>();
+        foreach (var node in this.graph.Keys)
         {
-            var nodeToRemove = predecesorCount.Keys.Where(node => predecesorCount[node] == 0).FirstOrDefault();
-            if (nodeToRemove == null) break;
-
-            var children = this.graph[nodeToRemove];
-            foreach (var child in children)
-            {
-                predecesorCount[child]--;
-            }
-
-            result.Add(nodeToRemove);
-            this.graph.Remove(nodeToRemove);
-            this.predecesorCount.Remove(nodeToRemove);
+            DepthFirstSearch(node, visited, cycles, sorted);
         }
-
-        if (graph.Count > 0)
-        {
-            throw new InvalidOperationException();
-        }
-
-        return result;
+        return sorted;
     }
-    private void GetPredecessorCount(Dictionary<string, List<string>> graph)
+
+    private void DepthFirstSearch(string node, HashSet<string> visited, HashSet<string> cycles, LinkedList<string> sorted)
     {
-        foreach (var kvp in graph)
+        if (cycles.Contains(node))
         {
-            var node = kvp.Key;
-            var children = kvp.Value;
+            throw new InvalidOperationException("Cycle detected.");
+        }
 
-            if (!predecesorCount.ContainsKey(node)) predecesorCount[node] = 0;
-            foreach (var child in children)
+        if (!visited.Contains(node))
+        {
+            visited.Add(node);
+            cycles.Add(node);
+            var children = this.graph[node];
+            foreach (var childNode in children)
             {
-                if (!predecesorCount.ContainsKey(child)) predecesorCount[child] = 0;
-                predecesorCount[child]++;
+                DepthFirstSearch(childNode, visited, cycles, sorted);
             }
+            cycles.Remove(node);
+            sorted.AddFirst(node);
         }
     }
+
+    //public ICollection<string> TopSort()
+    //{
+    //    GetPredecessorCount(this.graph);
+    //    var result = new List<string>();
+
+    //    while (true)
+    //    {
+    //        var nodeToRemove = predecesorCount.Keys.Where(node => predecesorCount[node] == 0).FirstOrDefault();
+    //        if (nodeToRemove == null) break;
+
+    //        var children = this.graph[nodeToRemove];
+    //        foreach (var child in children)
+    //        {
+    //            predecesorCount[child]--;
+    //        }
+
+    //        result.Add(nodeToRemove);
+    //        this.graph.Remove(nodeToRemove);
+    //        this.predecesorCount.Remove(nodeToRemove);
+    //    }
+
+    //    if (graph.Count > 0)
+    //    {
+    //        throw new InvalidOperationException();
+    //    }
+
+    //    return result;
+    //}
+
+    //private void GetPredecessorCount(Dictionary<string, List<string>> graph)
+    //{
+    //    foreach (var kvp in graph)
+    //    {
+    //        var node = kvp.Key;
+    //        var children = kvp.Value;
+
+    //        if (!predecesorCount.ContainsKey(node)) predecesorCount[node] = 0;
+    //        foreach (var child in children)
+    //        {
+    //            if (!predecesorCount.ContainsKey(child)) predecesorCount[child] = 0;
+    //            predecesorCount[child]++;
+    //        }
+    //    }
+    //}
 }
