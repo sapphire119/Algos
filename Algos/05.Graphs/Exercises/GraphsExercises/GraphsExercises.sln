@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30523.141
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "p01.DistanceBetweenVertices", "p01.DistanceBetweenVertices\p01.DistanceBetweenVertices.csproj", "{EB6195F7-F15A-4F7D-A989-7C2DA35560D4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "p02.AreasInMatrix", "p02.AreasInMatrix\p02.AreasInMatrix.csproj", "{F54DD9C5-37F3-403B-9FBC-0308C51D79CB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{EB6195F7-F15A-4F7D-A989-7C2DA35560D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB6195F7-F15A-4F7D-A989-7C2DA35560D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB6195F7-F15A-4F7D-A989-7C2DA35560D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F54DD9C5-37F3-403B-9FBC-0308C51D79CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F54DD9C5-37F3-403B-9FBC-0308C51D79CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F54DD9C5-37F3-403B-9FBC-0308C51D79CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F54DD9C5-37F3-403B-9FBC-0308C51D79CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
