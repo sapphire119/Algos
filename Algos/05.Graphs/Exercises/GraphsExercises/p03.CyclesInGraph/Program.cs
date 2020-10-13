@@ -9,48 +9,37 @@
         {
             string line;
             var graph = new List<Edge>();
+            var visited = new Dictionary<string, bool>();
             while (!string.IsNullOrWhiteSpace(line = Console.ReadLine()))
             {
-                var tokens = line.Split('-');
+                var tokens = line.Split('–');
                 var source = tokens[0];
                 var dest = tokens[1];
                 graph.Add(new Edge(source, dest));
-                //if (!graph.ContainsKey(source)) graph[source] = new List<string>();
-                //if (!graph.ContainsKey(dest)) graph[dest] = new List<string>();
-                //graph[source].Add(dest);
+
+                if (!visited.ContainsKey(source)) visited[source] = false;
+                if (!visited.ContainsKey(dest))   visited[dest] = false;
             }
 
-            var visited = new HashSet<string>();
-            var cycles = new HashSet<string>();
             var isAcyclic = true;
             foreach (var edge in graph)
             {
-                if(!visited.Contains(node))
-                    TopologicalSortsDepthFirstSearch(node, graph, visited, cycles, ref isAcyclic);
+                FindIfAcyclic(edge, visited, ref isAcyclic);
             }
-
             Console.WriteLine("Acyclic: {0}", isAcyclic ? "Yes" : "No");
         }
 
-        private static void TopologicalSortsDepthFirstSearch(string node, Dictionary<string, List<string>> graph, HashSet<string> visited,
-            HashSet<string> cycles,
-            ref bool isAcyclic)
+        private static bool IsVisited(Edge edge, Dictionary<string, bool> visited)
         {
-            if (cycles.Contains(node)) isAcyclic = false;
-            if (!visited.Contains(node) && isAcyclic)
-            {
-                visited.Add(node);
-                cycles.Add(node);
+            return visited[edge.Source] && visited[edge.Destination];
+        }
 
-                var children = graph[node];
-                foreach (var child in children)
-                {
-                    TopologicalSortsDepthFirstSearch(child, graph, visited, cycles, ref isAcyclic);
-                    if (!isAcyclic) return;
-                }
-
-                cycles.Remove(node);
-            }
+        private static void FindIfAcyclic(Edge edge, Dictionary<string, bool> visited, ref bool isAcyclic)
+        {
+            if (IsVisited(edge, visited)) isAcyclic = false;
+            if (!isAcyclic) return;
+            visited[edge.Source] = true;
+            visited[edge.Destination] = true;
         }
     }
 
@@ -59,15 +48,15 @@
         public Edge(string source, string dest)
         {
             this.Source = source;
-            this.Dest = dest;
+            this.Destination = dest;
         }
 
         public string Source { get; set; }
-        public string Dest { get; set; }
+        public string Destination { get; set; }
 
         public override string ToString()
         {
-            return $"{this.Source} -> {this.Dest}";
+            return $"{this.Source} -> {this.Destination}";
         }
     }
 }
