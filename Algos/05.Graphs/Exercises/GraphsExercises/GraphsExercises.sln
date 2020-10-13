@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30523.141
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "p01.DistanceBetweenVertices", "p01.DistanceBetweenVertices\p01.DistanceBetweenVertices.csproj", "{EB6195F7-F15A-4F7D-A989-7C2DA35560D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "p01.DistanceBetweenVertices", "p01.DistanceBetweenVertices\p01.DistanceBetweenVertices.csproj", "{EB6195F7-F15A-4F7D-A989-7C2DA35560D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "p02.AreasInMatrix", "p02.AreasInMatrix\p02.AreasInMatrix.csproj", "{F54DD9C5-37F3-403B-9FBC-0308C51D79CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "p02.AreasInMatrix", "p02.AreasInMatrix\p02.AreasInMatrix.csproj", "{F54DD9C5-37F3-403B-9FBC-0308C51D79CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "p03.CyclesInGraph", "p03.CyclesInGraph\p03.CyclesInGraph.csproj", "{D99F98D8-3BD5-459E-B79D-6A2AF7E26A65}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "p03.CyclesInGraph", "p03.CyclesInGraph\p03.CyclesInGraph.csproj", "{D99F98D8-3BD5-459E-B79D-6A2AF7E26A65}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "p04.Salaries", "p04.Salaries\p04.Salaries.csproj", "{94644D68-2676-4A5F-AC71-A30E8070728D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{D99F98D8-3BD5-459E-B79D-6A2AF7E26A65}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D99F98D8-3BD5-459E-B79D-6A2AF7E26A65}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D99F98D8-3BD5-459E-B79D-6A2AF7E26A65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94644D68-2676-4A5F-AC71-A30E8070728D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94644D68-2676-4A5F-AC71-A30E8070728D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94644D68-2676-4A5F-AC71-A30E8070728D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94644D68-2676-4A5F-AC71-A30E8070728D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
