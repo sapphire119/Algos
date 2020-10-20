@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30611.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "p01.Kruskal", "p01.Kruskal\p01.Kruskal.csproj", "{0375A929-BF6A-41CB-88B1-BDDBA93FFCE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "p02.Prim'sAlgo", "p02.Prim'sAlgo\p02.Prim'sAlgo.csproj", "{2BA30DEB-19A8-4E4D-8832-6458FBCE80B2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0375A929-BF6A-41CB-88B1-BDDBA93FFCE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0375A929-BF6A-41CB-88B1-BDDBA93FFCE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0375A929-BF6A-41CB-88B1-BDDBA93FFCE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0375A929-BF6A-41CB-88B1-BDDBA93FFCE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BA30DEB-19A8-4E4D-8832-6458FBCE80B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BA30DEB-19A8-4E4D-8832-6458FBCE80B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BA30DEB-19A8-4E4D-8832-6458FBCE80B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BA30DEB-19A8-4E4D-8832-6458FBCE80B2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5B9C1924-1DAB-4736-873C-719D281FBDBA}
+	EndGlobalSection
+EndGlobal
