@@ -41,11 +41,11 @@
 
 
             var distances = new Dictionary<int, int>();
-            //var prev = new Dictionary<int, int>();
+            var prev = new Dictionary<int, int>();
             foreach (var node in nodes)
             {
                 distances[node] = int.MaxValue;
-                //prev[node] = -1;
+                prev[node] = -1;
             }
 
             distances[nodes.First()] = 0;
@@ -83,6 +83,7 @@
                     if(newDistance < distances[otherNode])
                     {
                         distances[otherNode] = newDistance;
+                        prev[otherNode] = minNode;
                         queue = new SortedSet<int>(queue, Comparer<int>.Create((f, s) => distances[f] - distances[s]));
                     }
                 }
