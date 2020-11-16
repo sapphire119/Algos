@@ -1,0 +1,118 @@
+Permutations with repetitions
+
+Based on the permutations generator algorithms, the following methods generate the permutations for a set with repetition:
+1. The set is sorted.
+2. When there are to permute, they consider if the elements are equal or no.
+
+permutationsRep(int[]) (recursive)
+
+/** 
+ * Given ps, integer set with repetitions, it sorts it, and
+ * calls the method to permute it.
+ *
+ * @param ps Array of integers with repetitions, set of 
+ * elements to permute.
+ */
+public void permutationsRep(int[] ps) {
+    Arrays.sort(ps);
+    permuteRep(ps, 0, ps.length);
+}
+  
+/** 
+ * Calls doSomething() method with all the permutations
+ * of the ps set.
+ *
+ * It considers when elements are repeated.
+ *
+ * Initial call: permute(ps, 0, ps.length);
+ *
+ * @param ps Array of integers with repetitions, set of 
+ * elements to permute.
+ * @param start Index where permutation begins.
+ * @param n Number of elements of ps.
+ */
+public static void permute(int[] ps, int start, int n) {
+    doSomething(ps);
+    int tmp = 0;
+
+    if (start < n) {
+      for (int i = n - 2; i >= start; i--) {
+        for (int j = i + 1; j < n; j++) {
+          if (ps[i] != ps[j]) {
+            // swap ps[i] <--> ps[j]
+            tmp = ps[i];
+            ps[i] = ps[j];
+            ps[j] = tmp;
+
+            permute(ps, i + 1, n);
+          }
+        }
+
+        // Undo all modifications done by
+        // recursive calls and swapping
+        tmp = ps[i];
+        for (int k = i; k < n - 1;)
+          ps[k] = ps[++k];
+        ps[n - 1] = tmp;
+      }
+    }
+  }
+
+
+permuteRepIteretive(int[]) (iterative)
+
+/**
+* Calls the doSomething() method with all the permutaions
+* of ps.
+*
+* It considers when elements are repeated.
+*
+* @param ps Array of integers with repetitions, set of
+* elements to permute.
+*/
+public void permuteRepIteretive(int[] ps) {
+   doSomething(ps);
+   int n = ps.length;
+   int tmp = 0;
+
+   // indexes[i] = i+1;
+   int[] indexes = new int[n];
+   for (int i=0; i<n-1; ) indexes[i] = ++i;
+
+   for (int i = n-2; i >= 0;) {
+  
+     while(indexes[i]<n && ps[indexes[i]] == ps[i]) {
+       indexes[i]++;
+     }
+    
+     // swap ps[i] <--> ps[indexes[i]
+     if (indexes[i]<n) {
+       tmp = ps[indexes[i]];
+       ps[indexes[i]] = ps[i];
+       ps[i] = tmp;
+      
+       doSomething(ps);
+     }
+    
+     indexes[i]++;     
+
+     i = n-2;
+
+     while (i >= 0 && indexes[i] >= n) {
+       // Undo previous permutation from i+1
+       // Cyclical rotation to the left from i+1
+       // ps[k] = ps[k+1]
+       tmp = ps[i];
+       for (int k = i; k < n-1;)
+         ps[k] = ps[++k];
+       ps[n-1] = tmp;
+
+       // indexes[i]=i+1;
+       // i--;
+       indexes[i] = i-- + 1;
+     }
+   }
+ }
+
+
+https://hardprogrammer.blogspot.com/2006/11/permutaciones-con-repeticin.html
