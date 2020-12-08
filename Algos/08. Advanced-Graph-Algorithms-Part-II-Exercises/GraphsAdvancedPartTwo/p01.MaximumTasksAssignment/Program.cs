@@ -38,7 +38,6 @@
             while (Dfs(start, end, graph, parents))
             {
                 var currentNode = end;
-
                 while (currentNode != start)
                 {
                     var prevNode = parents[currentNode];
