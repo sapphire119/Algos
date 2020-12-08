@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "p01.MaximumTasksAssignment", "p01.MaximumTasksAssignment\p01.MaximumTasksAssignment.csproj", "{59CE4D81-FA73-4A55-88EA-19040BBFE94F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "p02.FindBiConnectedComponents", "p02.FindBiConnectedComponents\p02.FindBiConnectedComponents.csproj", "{E0401210-B918-4F80-96C5-0B847CF3E02E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "p02.FindBiConnectedComponents", "p02.FindBiConnectedComponents\p02.FindBiConnectedComponents.csproj", "{E0401210-B918-4F80-96C5-0B847CF3E02E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "p03.SupplementGraphToMakeItStronglyConnected", "p03.SupplementGraphToMakeItStronglyConnected\p03.SupplementGraphToMakeItStronglyConnected.csproj", "{8A16FE2E-D169-46C4-937E-2EC949180588}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{E0401210-B918-4F80-96C5-0B847CF3E02E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0401210-B918-4F80-96C5-0B847CF3E02E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E0401210-B918-4F80-96C5-0B847CF3E02E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A16FE2E-D169-46C4-937E-2EC949180588}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A16FE2E-D169-46C4-937E-2EC949180588}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A16FE2E-D169-46C4-937E-2EC949180588}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A16FE2E-D169-46C4-937E-2EC949180588}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
