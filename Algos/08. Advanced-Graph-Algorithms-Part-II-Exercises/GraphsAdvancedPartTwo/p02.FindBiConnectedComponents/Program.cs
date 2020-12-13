@@ -49,7 +49,7 @@
                 if (!visited[node])
                 {
                     //FindBiconnectedComponents(node, 1);
-                    FindByConnectedComponents(node, 1);
+                    FindBiConnectedComponents(node, 1);
                     while (edges.Count > 0)
                     {
                         if (!nodeEdges.ContainsKey(componentCounter)) nodeEdges[componentCounter] = new List<Edge>();
@@ -73,7 +73,7 @@
             //}
         }
 
-        private static void FindByConnectedComponents(int node, int depth)
+        private static void FindBiConnectedComponents(int node, int depth)
         {
             visited[node] = true;
             depths[node] = depth;
@@ -88,17 +88,18 @@
                     edges.Push(currentEdge);
                     childCount++;
 
-                    FindByConnectedComponents(child, depth + 1);
+                    FindBiConnectedComponents(child, depth + 1);
 
                     lowpoints[node] = Math.Min(lowpoints[node], lowpoints[child]);
-                    if (parents[node] == null && childCount > 1)
+                    if (parents[node] == null && childCount > 1 ||
+                        parents[node] != null && lowpoints[child] >= depths[node])
                     {
                         PrintFromEdges(currentEdge);
                     }
-                    if (parents[node] != null && lowpoints[child] >= depths[node])
-                    {
-                        PrintFromEdges(currentEdge);
-                    }
+                    //if ()
+                    //{
+                    //    PrintFromEdges(currentEdge);
+                    //}
                 }
                 else if (parents[node] != child &&
                     (depths[child] > 0 && lowpoints[node] > 0) &&
