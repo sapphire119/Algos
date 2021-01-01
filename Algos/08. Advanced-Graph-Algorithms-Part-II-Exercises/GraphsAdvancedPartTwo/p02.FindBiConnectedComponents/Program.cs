@@ -96,10 +96,6 @@
                     {
                         PrintFromEdges(currentEdge);
                     }
-                    //if ()
-                    //{
-                    //    PrintFromEdges(currentEdge);
-                    //}
                 }
                 else if (parents[node] != child &&
                     (depths[child] > 0 && lowpoints[node] > 0) &&

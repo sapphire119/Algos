@@ -14,9 +14,6 @@
             var totalNodes = tasks + people + 2;
             var graph = new int[totalNodes][];
 
-            var alphabet = new Dictionary<int, char>();
-            for (var (i, j) = ('A', 1); i <= 'Z'; i++, j++) alphabet.Add(j, i);
-
             for (int i = 0; i < graph.Length; i++) graph[i] = new int[totalNodes];
 
             for (int i = 1; i <= people; i++)
@@ -35,15 +32,16 @@
             var start = 0;
             var end = graph.Length - 1;
             
-            while (Dfs(start, end, graph, parents))
+            //Can be BFS/DFS
+            while (DFS(start, end, graph, parents))
             {
                 var currentNode = end;
                 while (currentNode != start)
                 {
                     var prevNode = parents[currentNode];
 
-                    graph[prevNode][currentNode] = 0;
-                    graph[currentNode][prevNode] = 1;
+                    graph[prevNode][currentNode] = 0; // remove pathflow
+                    graph[currentNode][prevNode] = 1; // add pathFlow
 
                     currentNode = prevNode;
                 }
@@ -54,33 +52,33 @@
             Console.WriteLine(string.Join(Environment.NewLine, result));
         }
 
-        private static void Bfs(int start, int end, int[][] graph, SortedSet<string> result, int people)
+        private static void Bfs(int end, int start, int[][] graph, SortedSet<string> result, int people)
         {
             var visisted = new bool[graph.Length];
             var queue = new Queue<int>();
-            queue.Enqueue(start);
+            queue.Enqueue(end);
 
             while (queue.Count > 0)
             {
-                var node = queue.Dequeue();
-                for (int child = 0; child < graph[node].Length; child++)
+                var currentNode = queue.Dequeue();
+                for (int child = 0; child < graph[currentNode].Length; child++)
                 {
-                    if(graph[node][child] > 0 && !visisted[child])
+                    if(graph[currentNode][child] > 0 && !visisted[child])
                     {
                         queue.Enqueue(child);
                         visisted[child] = true;
 
-                        if(node != start && child != end)
+                        if(currentNode != end && child != start)
                         {
-                            result.Add($"{(char)(child - 1 + 'A')}-{node - people}");
+                            result.Add($"{(char)(child - 1 + 'A')}-{currentNode - people}");
                         }
                     }
                 }
             }
         }
 
-        //Change to BFS for different output
-        private static bool Dfs(int start, int end, int[][] graph, int[] parents)
+        //Change to DFS for different output
+        private static bool DFS(int start, int end, int[][] graph, int[] parents)
         {
             var visited = new bool[graph.Length];
             var stack = new Stack<int>();
